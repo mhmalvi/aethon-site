@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { Mail, MapPin, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TextRandomized } from "@/components/ui/text-randomized";
@@ -68,9 +68,29 @@ export function ContactSection() {
       spot: "rgba(99,102,241,0.06)",
     },
     {
+      icon: Phone,
+      label: "Phone (US)",
+      value: FOOTER.contact.phone[0],
+      href: `tel:${FOOTER.contact.phone[0].replace(/[^+\d]/g, "")}`,
+      color: "#34d399",
+      bg: "rgba(52,211,153,0.10)",
+      border: "rgba(52,211,153,0.35)",
+      spot: "rgba(52,211,153,0.06)",
+    },
+    {
+      icon: Phone,
+      label: "Phone (BD)",
+      value: FOOTER.contact.phone[1],
+      href: `tel:${FOOTER.contact.phone[1].replace(/[^+\d]/g, "")}`,
+      color: "#34d399",
+      bg: "rgba(52,211,153,0.10)",
+      border: "rgba(52,211,153,0.35)",
+      spot: "rgba(52,211,153,0.06)",
+    },
+    {
       icon: MapPin,
       label: "Location",
-      value: FOOTER.contact.location,
+      value: FOOTER.contact.address,
       href: null,
       color: "#22d3ee",
       bg: "rgba(34,211,238,0.10)",

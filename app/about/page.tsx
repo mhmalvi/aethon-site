@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/sections/navbar";
 import { AboutHero } from "@/components/sections/v2/about/about-hero";
+import { AboutFounder } from "@/components/sections/v2/about/about-founder";
 import { AboutValues } from "@/components/sections/v2/about/about-values";
 import { AboutCapabilities } from "@/components/sections/v2/about/about-capabilities";
 import { CtaV2 } from "@/components/sections/v2/cta-v2";
@@ -19,6 +20,7 @@ export default function AboutPage() {
       <Navbar />
       <main>
         <AboutHero />
+        <AboutFounder />
         <AboutValues />
         <AboutCapabilities />
         <CtaV2 />

@@ -9,11 +9,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-accent text-white hover:bg-accent/90 hover:shadow-[0_0_20px_rgba(99,102,241,0.3),0_4px_16px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
+          "bg-btn-fill text-btn-fill-text hover:opacity-90 hover:shadow-[0_0_20px_rgba(99,102,241,0.15),0_4px_16px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
         gradient:
-          "bg-[linear-gradient(110deg,var(--accent),45%,var(--accent-cyan),55%,var(--accent))] bg-[length:250%_100%] animate-background-shine text-white hover:shadow-[0_0_30px_rgba(99,102,241,0.35),0_8px_24px_rgba(0,0,0,0.25)] hover:brightness-110 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
+          "bg-btn-fill text-btn-fill-text hover:opacity-90 hover:shadow-[0_0_30px_rgba(99,102,241,0.2),0_8px_24px_rgba(0,0,0,0.25)] hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
         outline:
-          "border border-border-light bg-transparent text-foreground hover:bg-foreground/5 hover:border-accent/50 hover:shadow-[0_0_20px_rgba(99,102,241,0.1),0_4px_12px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 hover:scale-[1.02] hover:text-accent active:scale-[0.98] active:translate-y-0",
+          "border border-border-light bg-transparent text-foreground hover:bg-foreground/5 hover:border-foreground/25 hover:shadow-[0_0_20px_rgba(99,102,241,0.1),0_4px_12px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0",
         ghost:
           "text-secondary hover:text-foreground hover:bg-foreground/5 hover:-translate-y-0.5 active:translate-y-0",
         link:

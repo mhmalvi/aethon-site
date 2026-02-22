@@ -290,9 +290,11 @@ export function ProcessV2() {
                 {/* Center hub */}
                 <Circle ref={centerRef} isCenter>
                   <div className="flex flex-col items-center">
-                    <span className="font-heading text-xs sm:text-sm font-bold tracking-[0.15em] gradient-text-accent">
-                      AETHON
-                    </span>
+                    <img
+                      src="/aethon-icon.png"
+                      alt="Aethon"
+                      className="h-6 sm:h-7 w-auto dark:invert"
+                    />
                   </div>
                 </Circle>
 

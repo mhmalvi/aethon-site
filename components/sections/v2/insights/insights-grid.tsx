@@ -107,9 +107,9 @@ export function InsightsGrid() {
                         : "brightness(0.8) saturate(0.9)",
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#06080f]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="text-[10px] tracking-[0.15em] uppercase text-white/80 font-bold bg-accent/20 backdrop-blur-sm rounded-full px-3 py-1">
+                    <span className="text-[10px] tracking-[0.15em] uppercase text-overlay-text/80 font-bold bg-accent/20 backdrop-blur-sm rounded-full px-3 py-1">
                       {post.category}
                     </span>
                   </div>

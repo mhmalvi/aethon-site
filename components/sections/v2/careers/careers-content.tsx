@@ -5,7 +5,7 @@ import { motion, useInView } from "motion/react";
 import { Globe, Code2, Rocket, TrendingUp, ArrowRight, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ConsultationModal } from "@/components/ui/consultation-modal";
+import { JobApplicationModal } from "@/components/ui/job-application-modal";
 import { CAREERS } from "@/lib/constants";
 
 const cultureIcons = [Globe, Code2, Rocket, TrendingUp];
@@ -236,7 +236,7 @@ export function CareersContent() {
                       </div>
                     </div>
 
-                    <ConsultationModal>
+                    <JobApplicationModal jobTitle={opening.title} jobType={opening.type}>
                       <Button
                         variant="outline"
                         size="sm"
@@ -245,7 +245,7 @@ export function CareersContent() {
                         Apply
                         <ArrowRight className="ml-1 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                       </Button>
-                    </ConsultationModal>
+                    </JobApplicationModal>
                   </div>
                 </motion.div>
               );

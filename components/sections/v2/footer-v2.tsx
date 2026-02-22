@@ -3,9 +3,16 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { useLenis } from "lenis/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 import Link from "next/link";
 import { FOOTER } from "@/lib/constants";
+
+const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Instagram,
+  Twitter,
+  Linkedin,
+  Facebook,
+};
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -44,6 +51,12 @@ export function FooterV2() {
             transition={{ duration: 0.6, ease: EASE }}
             className="max-w-md"
           >
+            <img
+              src="/aethon-logo-full.png"
+              alt="Aethon"
+              loading="lazy"
+              className="h-16 sm:h-20 w-auto mb-8 dark:invert"
+            />
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Have a project in mind?
               <br />
@@ -51,16 +64,48 @@ export function FooterV2() {
               something exceptional.
             </h2>
 
-            {/* Email CTA */}
-            <a
-              href={`mailto:${FOOTER.contact.email}`}
-              className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group py-2 px-4 -ml-4 rounded-lg hover:bg-accent/5"
-            >
-              <span className="relative border-b border-foreground/20 group-hover:border-accent pb-0.5 transition-colors duration-300">
-                {FOOTER.contact.email}
-              </span>
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            {/* Contact links */}
+            <div className="space-y-2">
+              <a
+                href={`mailto:${FOOTER.contact.email}`}
+                className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group py-2 px-4 -ml-4 rounded-lg hover:bg-accent/5"
+              >
+                <span className="relative border-b border-foreground/20 group-hover:border-accent pb-0.5 transition-colors duration-300">
+                  {FOOTER.contact.email}
+                </span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 pl-0.5">
+                {FOOTER.contact.phone.map((num) => (
+                  <a
+                    key={num}
+                    href={`tel:${num.replace(/[^+\d]/g, "")}`}
+                    className="text-sm text-secondary/60 hover:text-accent transition-colors duration-200"
+                  >
+                    {num}
+                  </a>
+                ))}
+              </div>
+
+              {/* Social links */}
+              <div className="flex items-center gap-3 mt-5">
+                {FOOTER.social.map((s) => {
+                  const Icon = socialIconMap[s.icon];
+                  return (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-secondary/50 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 hover:-translate-y-0.5"
+                    >
+                      {Icon && <Icon className="w-4 h-4" />}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </motion.div>
 
           {/* Link columns */}
@@ -103,26 +148,20 @@ export function FooterV2() {
 
         {/* Bottom: Giant brand + footer bar */}
         <div className="relative">
-          {/* Giant watermark text — animated drift */}
+          {/* Giant watermark logo — animated drift */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.3 }}
             className="select-none pointer-events-none overflow-hidden"
+            style={{ animation: "v2-watermark-drift 12s ease-in-out infinite" }}
           >
-            <span
-              className="block font-heading text-[16vw] lg:text-[14vw] font-black tracking-[-0.05em] leading-none"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(34,211,238,0.04) 50%, rgba(99,102,241,0.02) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "v2-watermark-drift 12s ease-in-out infinite",
-              }}
-            >
-              AETHON
-            </span>
+            <img
+              src="/aethon-wordmark.png"
+              alt=""
+              aria-hidden="true"
+              className="w-full h-auto dark:invert opacity-[0.04] dark:opacity-[0.06]"
+            />
           </motion.div>
 
           {/* Footer bar */}

@@ -2,53 +2,57 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is([data-theme="dark"] *, :root:not([data-theme="light"]) *));
 
 /* ── Dark theme (default) ── */
 :root,
 [data-theme="dark"] {
-  --primary: #06080f;
-  --primary-light: #0c1220;
-  --foreground: #f0f0f5;
+  --primary: #0a0c14;
+  --primary-light: #10162a;
+  --foreground: #e8e8ed;
   --secondary: #8a94a6;
   --accent: #6366f1;
   --accent-cyan: #22d3ee;
-  --background: #06080f;
-  --surface: #111827;
-  --surface-light: #1a2236;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-light: rgba(255, 255, 255, 0.1);
-  --light-text: #e2e8f0;
-  --card-bg: rgba(17, 24, 39, 0.6);
-  --card-bg-hover: rgba(17, 24, 39, 0.8);
+  --background: #0a0c14;
+  --surface: #141c2e;
+  --surface-light: #1e2940;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-light: rgba(255, 255, 255, 0.12);
+  --light-text: #d5dae4;
+  --card-bg: rgba(20, 28, 46, 0.6);
+  --card-bg-hover: rgba(20, 28, 46, 0.8);
   --card-border-hover: rgba(99, 102, 241, 0.3);
-  --nav-bg: rgba(6, 8, 15, 0.8);
-  --overlay-text: #ffffff;
-  --surface-subtle: rgba(255, 255, 255, 0.03);
-  --surface-subtle-hover: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(10, 12, 20, 0.85);
+  --overlay-text: #e8e8ed;
+  --surface-subtle: rgba(255, 255, 255, 0.04);
+  --surface-subtle-hover: rgba(255, 255, 255, 0.06);
+  --btn-fill: #e8e8ed;
+  --btn-fill-text: #0a0c14;
 }
 
 /* ── Light theme ── */
 [data-theme="light"] {
-  --primary: #ffffff;
-  --primary-light: #f8f9fb;
-  --foreground: #0f172a;
-  --secondary: #64748b;
+  --primary: #f8f8fa;
+  --primary-light: #f0f1f5;
+  --foreground: #1a1e2e;
+  --secondary: #566178;
   --accent: #6366f1;
   --accent-cyan: #0891b2;
-  --background: #ffffff;
-  --surface: #f1f5f9;
-  --surface-light: #e2e8f0;
-  --border: rgba(0, 0, 0, 0.06);
-  --border-light: rgba(0, 0, 0, 0.1);
-  --light-text: #1e293b;
-  --card-bg: rgba(241, 245, 249, 0.8);
-  --card-bg-hover: rgba(241, 245, 249, 1);
+  --background: #f8f8fa;
+  --surface: #edeef3;
+  --surface-light: #e0e2ea;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.12);
+  --light-text: #2a2e3e;
+  --card-bg: rgba(237, 238, 243, 0.8);
+  --card-bg-hover: rgba(237, 238, 243, 1);
   --card-border-hover: rgba(99, 102, 241, 0.25);
-  --nav-bg: rgba(255, 255, 255, 0.85);
-  --overlay-text: #0f172a;
+  --nav-bg: rgba(248, 248, 250, 0.9);
+  --overlay-text: #1a1e2e;
   --surface-subtle: rgba(0, 0, 0, 0.03);
-  --surface-subtle-hover: rgba(0, 0, 0, 0.05);
+  --surface-subtle-hover: rgba(0, 0, 0, 0.06);
+  --btn-fill: #1a1e2e;
+  --btn-fill-text: #f8f8fa;
 }
 
 @theme inline {
@@ -71,6 +75,8 @@
   --color-overlay-text: var(--overlay-text);
   --color-surface-subtle: var(--surface-subtle);
   --color-surface-subtle-hover: var(--surface-subtle-hover);
+  --color-btn-fill: var(--btn-fill);
+  --color-btn-fill-text: var(--btn-fill-text);
   --font-heading: var(--font-space-grotesk);
   --font-body: var(--font-poppins);
 }

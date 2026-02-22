@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useCallback, useEffect } from "react";
+import React, { createContext, useContext, useCallback, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Drawer } from "vaul";
 import { X } from "lucide-react";
@@ -75,6 +75,7 @@ export function ResponsiveModalContent({
 }: ResponsiveModalContentProps) {
   const { open, setOpen } = useContext(ModalContext);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
@@ -88,19 +89,16 @@ export function ResponsiveModalContent({
     return () => document.removeEventListener("keydown", onKey);
   }, [open, handleClose]);
 
-  // Stop Lenis smooth scroll + lock body scroll when open
+  // Stop Lenis smooth scroll when open
   const lenis = useLenis();
   useEffect(() => {
     if (open) {
       lenis?.stop();
-      document.body.style.overflow = "hidden";
     } else {
       lenis?.start();
-      document.body.style.overflow = "";
     }
     return () => {
       lenis?.start();
-      document.body.style.overflow = "";
     };
   }, [open, lenis]);
 
@@ -127,46 +125,48 @@ export function ResponsiveModalContent({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center"
+          ref={scrollRef}
+          className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Backdrop */}
-          <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          {/* Backdrop — fills scroll area */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={handleClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
           />
 
-          {/* Panel */}
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.96 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            className={cn(
-              "relative z-10 w-full max-w-lg mx-4 max-h-[90vh] rounded-2xl border border-border bg-background shadow-2xl shadow-black/50 overflow-y-auto overflow-x-hidden",
-              className
-            )}
-          >
-            {/* Top accent line */}
-            <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-
-            {/* Close button */}
-            <button
-              onClick={handleClose}
-              className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-secondary/40 hover:text-foreground hover:bg-surface-subtle transition-all duration-200"
-              aria-label="Close"
+          {/* Centering wrapper — scrollable when content exceeds viewport */}
+          <div className="relative z-10 flex min-h-full items-center justify-center p-4 sm:p-8">
+            {/* Panel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className={cn(
+                "relative w-full max-w-lg rounded-2xl border border-border bg-background shadow-2xl shadow-black/50 overflow-hidden",
+                className
+              )}
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-4 h-4" />
-            </button>
+              {/* Top accent line */}
+              <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
-            {children}
-          </motion.div>
+              {/* Close button */}
+              <button
+                onClick={handleClose}
+                className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-secondary/40 hover:text-foreground hover:bg-surface-subtle transition-all duration-200"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {children}
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

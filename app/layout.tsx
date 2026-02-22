@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Aethon — Digital Systems & Automation Partner",
   description:
     "We design, build, and run reliable business systems — combining automation, AI, software, and security.",
+  icons: {
+    icon: "/aethon-icon.png",
+    apple: "/aethon-icon.png",
+  },
 };
 
 export default function RootLayout({

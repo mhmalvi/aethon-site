@@ -106,37 +106,88 @@ export const CASE_STUDIES = {
   subtext: "Real problems. Engineered solutions. Proven results.",
   studies: [
     {
+      id: "automated-loan-processing",
       industry: "Financial Services",
       title: "Automated loan processing decision workflow",
       problem:
         "Manual document verification created multi-day turnaround times and high operational overhead.",
+      solution:
+        "We built an end-to-end document ingestion and decision workflow using OCR, rule-based validation, and AI-assisted risk scoring. The system automatically classifies incoming documents, extracts key data, runs compliance checks, and routes decisions to the right team — eliminating manual handoffs entirely.",
+      approach: [
+        "Mapped the existing 14-step manual review process and identified seven automation opportunities",
+        "Built a document classification pipeline using fine-tuned models for financial document types",
+        "Engineered a rules engine for compliance validation with audit trail logging",
+        "Deployed an AI risk scoring model integrated into the existing loan management system",
+        "Created real-time dashboards for operations managers to monitor pipeline health",
+      ],
+      results: [
+        "Processing time reduced from 4.2 days to 1.3 days average",
+        "Operational cost per application dropped by 45%",
+        "Error rate decreased from 8.3% to under 1.5%",
+        "Team capacity freed to handle 2× application volume",
+      ],
       metric: "68%",
       metricLabel: "reduction in processing time",
       secondaryMetric: "45%",
       secondaryLabel: "lower cost per application",
       image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
+      tech: ["Python", "OCR Pipeline", "Rules Engine", "React Dashboard", "PostgreSQL"],
     },
     {
+      id: "ai-shipment-copilot",
       industry: "Logistics & Supply Chain",
       title: "AI copilot for real-time shipment decisions",
       problem:
         "Dispatch teams relied on spreadsheets and manual coordination, causing delays and inconsistent decisions.",
+      solution:
+        "We designed and deployed an AI-powered dispatch copilot that ingests real-time data from GPS trackers, warehouse systems, and weather APIs. The system recommends optimal routing, flags potential delays before they happen, and automates routine dispatch decisions while escalating exceptions to human operators.",
+      approach: [
+        "Integrated data feeds from 6 source systems into a unified real-time event stream",
+        "Built a predictive delay model trained on 18 months of historical shipment data",
+        "Designed an operator interface with one-click accept/override for AI recommendations",
+        "Implemented automated dispatch rules for routine shipments under defined thresholds",
+        "Deployed monitoring dashboards with live fleet visibility and KPI tracking",
+      ],
+      results: [
+        "Dispatch decision time reduced by 32% across all shipment types",
+        "Delivery delays decreased by 22% in the first quarter",
+        "Dispatcher workload reduced — team handles 40% more volume",
+        "Customer satisfaction scores improved by 18 points",
+      ],
       metric: "32%",
       metricLabel: "faster dispatch decisions",
       secondaryMetric: "22%",
       secondaryLabel: "fewer delivery delays",
       image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop",
+      tech: ["Event Streaming", "ML Pipeline", "Next.js", "Real-time APIs", "Kubernetes"],
     },
     {
+      id: "multi-tenant-saas-platform",
       industry: "SaaS Platform",
       title: "Scalable multi-tenant customer platform",
       problem:
         "Legacy system could not support growth or new revenue models.",
+      solution:
+        "We re-architected the client's monolithic application into a modern multi-tenant platform with isolated data, role-based access, and usage-based billing. The new system supports white-label deployments, API-first integrations, and scales horizontally to handle 10× current load.",
+      approach: [
+        "Conducted a full architecture audit identifying scaling bottlenecks and security gaps",
+        "Designed a multi-tenant data isolation strategy with per-tenant encryption keys",
+        "Built a microservices backend with API gateway and event-driven communication",
+        "Implemented role-based access control with tenant-scoped permissions",
+        "Engineered a usage-based billing system integrated with Stripe",
+      ],
+      results: [
+        "Platform now supports 3× more concurrent users without performance degradation",
+        "Unlocked a new recurring revenue stream through tiered subscription pricing",
+        "Deployment time for new tenants reduced from 2 weeks to under 4 hours",
+        "Zero-downtime deployments achieved with blue-green release strategy",
+      ],
       metric: "3×",
       metricLabel: "user growth capacity",
       secondaryMetric: "New",
       secondaryLabel: "recurring revenue stream",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      tech: ["TypeScript", "Microservices", "PostgreSQL", "Stripe", "Terraform"],
     },
   ],
 } as const;
@@ -616,9 +667,17 @@ export const FOOTER = {
     ],
   },
   contact: {
-    email: "hello@aethon.systems",
-    location: "Global delivery — teams across multiple time zones",
+    email: "info@aethonautomation.com",
+    phone: ["+1 (830) 754-4901", "+880 1710 895523"],
+    address: "123 Denver, CO 80203, USA",
+    location: "Denver, CO — Global Delivery",
   },
+  social: [
+    { label: "Instagram", href: "https://www.instagram.com/aethonautomation/", icon: "Instagram" as const },
+    { label: "X", href: "https://x.com/Aethon_Auto", icon: "Twitter" as const },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/aethon-automation-solutions/", icon: "Linkedin" as const },
+    { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61571456545546", icon: "Facebook" as const },
+  ],
 } as const;
 
 export const SOLUTIONS = {

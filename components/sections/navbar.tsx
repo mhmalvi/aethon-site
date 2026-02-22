@@ -312,8 +312,12 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* Logo */}
-        <Link href="/" className="font-heading text-xl font-bold tracking-tight">
-          <span className="gradient-text-accent">AETHON</span>
+        <Link href="/" className="flex-shrink-0">
+          <img
+            src="/aethon-wordmark.png"
+            alt="Aethon"
+            className="h-6 sm:h-7 w-auto dark:invert transition-opacity duration-200 hover:opacity-80"
+          />
         </Link>
 
         {/* Desktop links */}

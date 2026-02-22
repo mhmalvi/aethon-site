@@ -89,7 +89,7 @@ export function CaseStudiesList() {
                 handleMouseLeave(e);
               }}
               onMouseMove={handleMouseMove}
-              className="v2-spotlight v2-tilt relative rounded-2xl border overflow-hidden transition-all duration-500 ease-out cursor-default"
+              className="v2-spotlight v2-tilt relative rounded-2xl border overflow-hidden transition-all duration-500 ease-out"
               style={{
                 borderColor: isHovered
                   ? "rgba(99,102,241,0.3)"
@@ -100,68 +100,68 @@ export function CaseStudiesList() {
                 "--spot-color": "rgba(99,102,241,0.06)",
               } as React.CSSProperties}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Image */}
-                <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out"
-                    style={{
-                      transform: isHovered ? "scale(1.05)" : "scale(1)",
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
-                  <div className="absolute bottom-6 left-6">
-                    <span className="font-heading text-5xl sm:text-6xl font-bold gradient-text-accent leading-none">
-                      {study.metric}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
-                  <span className="text-xs tracking-[0.15em] uppercase text-accent font-bold mb-4 block">
-                    {study.industry}
-                  </span>
-                  <h3 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight mb-4">
-                    {study.title}
-                  </h3>
-                  <p className="text-secondary/60 text-sm leading-relaxed mb-6">
-                    {study.problem}
-                  </p>
-
-                  <div className="flex items-end justify-between gap-6">
-                    <div className="flex gap-8">
-                      <div>
-                        <span className="block font-heading text-2xl font-bold gradient-text-accent">
-                          {study.metric}
-                        </span>
-                        <span className="text-[11px] text-secondary/40 tracking-wide">
-                          {study.metricLabel}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="block font-heading text-2xl font-bold text-accent-cyan">
-                          {study.secondaryMetric}
-                        </span>
-                        <span className="text-[11px] text-secondary/40 tracking-wide">
-                          {study.secondaryLabel}
-                        </span>
-                      </div>
+              <Link href={`/case-studies/${study.id}`} className="block">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  {/* Image */}
+                  <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out"
+                      style={{
+                        transform: isHovered ? "scale(1.05)" : "scale(1)",
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
+                    <div className="absolute bottom-6 left-6">
+                      <span className="font-heading text-5xl sm:text-6xl font-bold gradient-text-accent leading-none">
+                        {study.metric}
+                      </span>
                     </div>
-                    <ConsultationModal>
-                      <button
-                        className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-accent/70 hover:text-accent transition-colors duration-300 flex-shrink-0 group/link cursor-pointer"
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+                    <span className="text-xs tracking-[0.15em] uppercase text-accent font-bold mb-4 block">
+                      {study.industry}
+                    </span>
+                    <h3 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+                      {study.title}
+                    </h3>
+                    <p className="text-secondary/60 text-sm leading-relaxed mb-6">
+                      {study.problem}
+                    </p>
+
+                    <div className="flex items-end justify-between gap-6">
+                      <div className="flex gap-8">
+                        <div>
+                          <span className="block font-heading text-2xl font-bold gradient-text-accent">
+                            {study.metric}
+                          </span>
+                          <span className="text-[11px] text-secondary/40 tracking-wide">
+                            {study.metricLabel}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="block font-heading text-2xl font-bold text-accent-cyan">
+                            {study.secondaryMetric}
+                          </span>
+                          <span className="text-[11px] text-secondary/40 tracking-wide">
+                            {study.secondaryLabel}
+                          </span>
+                        </div>
+                      </div>
+                      <span
+                        className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-accent/70 hover:text-accent transition-colors duration-300 flex-shrink-0 group/link"
                       >
-                        Discuss this project
+                        View case study
                         <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
-                      </button>
-                    </ConsultationModal>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           );
         })}

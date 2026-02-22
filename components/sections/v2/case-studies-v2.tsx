@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { CASE_STUDIES } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -92,7 +93,7 @@ function CaseStudyPanel({
           </p>
 
           {/* Metrics row */}
-          <div className="flex items-end gap-8 sm:gap-12">
+          <div className="flex items-end gap-8 sm:gap-12 mb-8">
             <div>
               <span className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold gradient-text-accent leading-none block">
                 {study.metric}
@@ -110,6 +111,13 @@ function CaseStudyPanel({
               </span>
             </div>
           </div>
+
+          <Button variant="outline" size="sm" className="group" asChild>
+            <Link href={`/case-studies/${study.id}`}>
+              View case study
+              <ArrowRight className="ml-1.5 size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </div>
       </div>
     </div>
