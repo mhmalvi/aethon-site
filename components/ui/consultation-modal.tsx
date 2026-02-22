@@ -35,6 +35,15 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
   const [loading, setLoading] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
+  const handleReset = useCallback(() => {
+    // Delay reset so exit animation finishes before content changes
+    setTimeout(() => {
+      setSubmitted(false);
+      setSelectedService(null);
+      setLoading(false);
+    }, 300);
+  }, []);
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -63,6 +72,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
           setTimeout(() => {
             setSubmitted(false);
             setSelectedService(null);
+            setLoading(false);
           }, 300);
         }, 2000);
       } else {
@@ -73,7 +83,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
   );
 
   return (
-    <ResponsiveModal open={open} setOpen={setOpen}>
+    <ResponsiveModal open={open} setOpen={setOpen} onClose={handleReset}>
       <ResponsiveModalTrigger asChild>{children}</ResponsiveModalTrigger>
       <ResponsiveModalContent>
         <div className="p-6 sm:p-8">

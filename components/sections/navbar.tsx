@@ -379,7 +379,11 @@ export function Navbar() {
                 />
               ))}
               <ConsultationModal>
-                <Button variant="gradient" className="mt-4 w-full">
+                <Button
+                  variant="gradient"
+                  className="mt-4 w-full"
+                  onClick={() => setMobileOpen(false)}
+                >
                   Book a Consultation
                 </Button>
               </ConsultationModal>

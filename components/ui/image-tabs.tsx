@@ -31,7 +31,7 @@ export function TabsProvider({
   className?: string;
 }) {
   const [activeTab, setActiveTab] = useState(defaultValue);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { matches: isDesktop } = useMediaQuery("(min-width: 768px)");
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab, isDesktop }}>
       <div className={cn("w-full h-full", className)}>{children}</div>

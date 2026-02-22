@@ -316,6 +316,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     var(--accent-cyan) 100%
   );
   animation: border-spin 3s linear infinite;
+  pointer-events: none;
 }
 
 .rotating-border > * {

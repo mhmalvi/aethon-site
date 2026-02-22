@@ -18,7 +18,7 @@ export function NewsletterModal() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { matches: isDesktop, mounted } = useMediaQuery("(min-width: 768px)");
   const triggeredRef = useRef(false);
 
   // Check if already dismissed on mount
@@ -41,6 +41,11 @@ export function NewsletterModal() {
   const handleClose = useCallback(() => {
     setOpen(false);
     sessionStorage.setItem(STORAGE_KEY, "1");
+    // Reset state after exit animation
+    setTimeout(() => {
+      setSubmitted(false);
+      setLoading(false);
+    }, 400);
   }, []);
 
   const handleSubmit = useCallback(
@@ -161,6 +166,9 @@ export function NewsletterModal() {
       </AnimatePresence>
     </div>
   );
+
+  // Don't render until after hydration to avoid mismatch
+  if (!mounted) return null;
 
   if (!isDesktop) {
     /* ── Mobile: Vaul Drawer ── */

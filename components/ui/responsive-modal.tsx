@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useCallback, useEffect, useRef } from "react";
+import React, { createContext, useContext, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Drawer } from "vaul";
 import { X } from "lucide-react";
@@ -26,16 +27,26 @@ interface ResponsiveModalProps {
   children: React.ReactNode;
   open?: boolean;
   setOpen?: (v: boolean) => void;
+  onClose?: () => void;
 }
 
 export function ResponsiveModal({
   children,
   open: controlledOpen,
   setOpen: controlledSetOpen,
+  onClose,
 }: ResponsiveModalProps) {
   const [uncontrolledOpen, uncontrolledSetOpen] = React.useState(false);
   const open = controlledOpen ?? uncontrolledOpen;
-  const setOpen = controlledSetOpen ?? uncontrolledSetOpen;
+  const rawSetOpen = controlledSetOpen ?? uncontrolledSetOpen;
+
+  const setOpen = useCallback(
+    (v: boolean) => {
+      rawSetOpen(v);
+      if (!v && onClose) onClose();
+    },
+    [rawSetOpen, onClose]
+  );
 
   return (
     <ModalContext.Provider value={{ open, setOpen }}>
@@ -74,7 +85,7 @@ export function ResponsiveModalContent({
   className,
 }: ResponsiveModalContentProps) {
   const { open, setOpen } = useContext(ModalContext);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { matches: isDesktop, mounted } = useMediaQuery("(min-width: 768px)");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
@@ -89,18 +100,24 @@ export function ResponsiveModalContent({
     return () => document.removeEventListener("keydown", onKey);
   }, [open, handleClose]);
 
-  // Stop Lenis smooth scroll when open
+  // Stop Lenis smooth scroll + lock native scroll when open
+  // useLayoutEffect fires before paint to prevent any scroll frame gap
   const lenis = useLenis();
-  useEffect(() => {
-    if (open) {
-      lenis?.stop();
-    } else {
-      lenis?.start();
-    }
+  useLayoutEffect(() => {
+    if (!open) return;
+    lenis?.stop();
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
     return () => {
       lenis?.start();
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [open, lenis]);
+
+  // Don't render until after hydration to avoid mismatch
+  if (!mounted) return null;
 
   if (!isDesktop) {
     /* ── Mobile: Vaul Drawer ── */
@@ -120,8 +137,8 @@ export function ResponsiveModalContent({
     );
   }
 
-  /* ── Desktop: Animated dialog ── */
-  return (
+  /* ── Desktop: Animated dialog (portaled to body to escape containing blocks) ── */
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -132,14 +149,14 @@ export function ResponsiveModalContent({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Backdrop — fills scroll area */}
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={handleClose}
-          />
+          {/* Backdrop */}
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
 
-          {/* Centering wrapper — scrollable when content exceeds viewport */}
-          <div className="relative z-10 flex min-h-full items-center justify-center p-4 sm:p-8">
+          {/* Centering wrapper — click outside panel closes modal */}
+          <div
+            className="relative z-10 flex min-h-full items-center justify-center p-4 sm:p-8"
+            onClick={handleClose}
+          >
             {/* Panel */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -169,6 +186,7 @@ export function ResponsiveModalContent({
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

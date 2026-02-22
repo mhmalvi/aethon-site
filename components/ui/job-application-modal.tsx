@@ -32,6 +32,13 @@ export function JobApplicationModal({
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const handleReset = useCallback(() => {
+    setTimeout(() => {
+      setSubmitted(false);
+      setLoading(false);
+    }, 300);
+  }, []);
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -61,6 +68,7 @@ export function JobApplicationModal({
           setOpen(false);
           setTimeout(() => {
             setSubmitted(false);
+            setLoading(false);
           }, 300);
         }, 2000);
       } else {
@@ -71,7 +79,7 @@ export function JobApplicationModal({
   );
 
   return (
-    <ResponsiveModal open={open} setOpen={setOpen}>
+    <ResponsiveModal open={open} setOpen={setOpen} onClose={handleReset}>
       <ResponsiveModalTrigger asChild>{children}</ResponsiveModalTrigger>
       <ResponsiveModalContent>
         <div className="p-6 sm:p-8">
