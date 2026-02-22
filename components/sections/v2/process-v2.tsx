@@ -293,7 +293,7 @@ export function ProcessV2() {
                     <img
                       src="/aethon-icon.png"
                       alt="Aethon"
-                      className="h-10 sm:h-12 w-auto dark:invert"
+                      className="h-14 sm:h-16 w-auto dark:invert"
                     />
                   </div>
                 </Circle>

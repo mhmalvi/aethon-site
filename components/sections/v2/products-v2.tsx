@@ -17,28 +17,32 @@ const cardColors = [
     accentBg: "rgba(99,102,241,0.12)",
     border: "rgba(99,102,241,0.15)",
     darkBg: "linear-gradient(135deg, rgba(49,46,129,0.4) 0%, #0a0c14 100%)",
-    lightBg: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, var(--background) 100%)",
+    lightBg: "linear-gradient(135deg, #edeef8 0%, #f8f8fa 100%)",
+    lightBorder: "rgba(99,102,241,0.2)",
   },
   {
     accent: "#22d3ee",
     accentBg: "rgba(34,211,238,0.12)",
     border: "rgba(34,211,238,0.15)",
     darkBg: "linear-gradient(135deg, rgba(22,78,99,0.4) 0%, #0a0c14 100%)",
-    lightBg: "linear-gradient(135deg, rgba(34,211,238,0.08) 0%, var(--background) 100%)",
+    lightBg: "linear-gradient(135deg, #e8f6f9 0%, #f8f8fa 100%)",
+    lightBorder: "rgba(34,211,238,0.2)",
   },
   {
     accent: "#a78bfa",
     accentBg: "rgba(167,139,250,0.12)",
     border: "rgba(167,139,250,0.15)",
     darkBg: "linear-gradient(135deg, rgba(76,29,149,0.4) 0%, #0a0c14 100%)",
-    lightBg: "linear-gradient(135deg, rgba(167,139,250,0.08) 0%, var(--background) 100%)",
+    lightBg: "linear-gradient(135deg, #f0ecf9 0%, #f8f8fa 100%)",
+    lightBorder: "rgba(167,139,250,0.2)",
   },
   {
     accent: "#34d399",
     accentBg: "rgba(52,211,153,0.12)",
     border: "rgba(52,211,153,0.15)",
     darkBg: "linear-gradient(135deg, rgba(6,78,59,0.4) 0%, #0a0c14 100%)",
-    lightBg: "linear-gradient(135deg, rgba(52,211,153,0.08) 0%, var(--background) 100%)",
+    lightBg: "linear-gradient(135deg, #e8f5f0 0%, #f8f8fa 100%)",
+    lightBorder: "rgba(52,211,153,0.2)",
   },
 ];
 
@@ -75,7 +79,10 @@ function StackingCard({ index, total }: { index: number; total: number }) {
       >
         <div
           className="rounded-2xl border overflow-hidden"
-          style={{ borderColor: color.border, background: theme === "dark" ? color.darkBg : color.lightBg }}
+          style={{
+            borderColor: theme === "dark" ? color.border : color.lightBorder,
+            background: theme === "dark" ? color.darkBg : color.lightBg,
+          }}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left content */}
