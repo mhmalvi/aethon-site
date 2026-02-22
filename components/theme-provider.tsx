@@ -72,8 +72,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             style={{
               backgroundColor:
                 theme === "dark"
-                  ? "rgba(248, 249, 251, 0.15)"
-                  : "rgba(6, 8, 15, 0.15)",
+                  ? "rgba(248, 248, 250, 0.15)"
+                  : "rgba(10, 12, 20, 0.15)",
             }}
           />
         )}

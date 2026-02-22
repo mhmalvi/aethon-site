@@ -28,6 +28,7 @@
   --surface-subtle-hover: rgba(255, 255, 255, 0.06);
   --btn-fill: #e8e8ed;
   --btn-fill-text: #0a0c14;
+  --btn-fill-highlight: #ffffff;
 }
 
 /* ── Light theme ── */
@@ -53,6 +54,7 @@
   --surface-subtle-hover: rgba(0, 0, 0, 0.06);
   --btn-fill: #1a1e2e;
   --btn-fill-text: #f8f8fa;
+  --btn-fill-highlight: #2e3348;
 }
 
 @theme inline {
@@ -77,6 +79,7 @@
   --color-surface-subtle-hover: var(--surface-subtle-hover);
   --color-btn-fill: var(--btn-fill);
   --color-btn-fill-text: var(--btn-fill-text);
+  --color-btn-fill-highlight: var(--btn-fill-highlight);
   --font-heading: var(--font-space-grotesk);
   --font-body: var(--font-poppins);
 }

@@ -12,8 +12,8 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={toggleTheme}
       className={`relative w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer transition-colors ${
         theme === "dark"
-          ? "bg-white/10 hover:bg-white/15 text-foreground"
-          : "bg-black/5 hover:bg-black/10 text-foreground"
+          ? "bg-foreground/10 hover:bg-foreground/15 text-foreground"
+          : "bg-foreground/5 hover:bg-foreground/10 text-foreground"
       } ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
