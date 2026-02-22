@@ -105,51 +105,51 @@ export function FooterV2() {
 
             {/* Contact info — below the link columns */}
             <div className="mt-12 pt-8 border-t border-border/40">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-                <div>
-                  <a
-                    href={`mailto:${FOOTER.contact.email}`}
-                    className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group"
-                  >
-                    <span className="relative border-b border-foreground/20 group-hover:border-accent pb-0.5 transition-colors duration-300">
-                      {FOOTER.contact.email}
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-2">
-                    {FOOTER.contact.phone.map((num) => (
-                      <a
-                        key={num}
-                        href={`tel:${num.replace(/[^+\d]/g, "")}`}
-                        className="text-sm text-secondary/60 hover:text-accent transition-colors duration-200"
-                      >
-                        {num}
-                      </a>
-                    ))}
-                  </div>
-                  <p className="text-sm text-secondary/50 mt-2">
-                    {FOOTER.contact.address}
-                  </p>
-                </div>
+              {/* Email — prominent */}
+              <a
+                href={`mailto:${FOOTER.contact.email}`}
+                className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group"
+              >
+                <span className="relative border-b border-foreground/20 group-hover:border-accent pb-0.5 transition-colors duration-300">
+                  {FOOTER.contact.email}
+                </span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
 
-                {/* Social links */}
-                <div className="flex items-center gap-3">
-                  {FOOTER.social.map((s) => {
-                    const Icon = socialIconMap[s.icon];
-                    return (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={s.label}
-                        className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-secondary/50 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 hover:-translate-y-0.5"
-                      >
-                        {Icon && <Icon className="w-4 h-4" />}
-                      </a>
-                    );
-                  })}
-                </div>
+              {/* Phone + Address + Social — compact row */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-3">
+                {FOOTER.contact.phone.map((num) => (
+                  <a
+                    key={num}
+                    href={`tel:${num.replace(/[^+\d]/g, "")}`}
+                    className="text-sm text-secondary/60 hover:text-accent transition-colors duration-200"
+                  >
+                    {num}
+                  </a>
+                ))}
+                <span className="text-secondary/20 hidden sm:inline">|</span>
+                <p className="text-sm text-secondary/50">
+                  {FOOTER.contact.address}
+                </p>
+              </div>
+
+              {/* Social links */}
+              <div className="flex items-center gap-3 mt-5">
+                {FOOTER.social.map((s) => {
+                  const Icon = socialIconMap[s.icon];
+                  return (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-secondary/50 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 hover:-translate-y-0.5"
+                    >
+                      {Icon && <Icon className="w-4 h-4" />}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

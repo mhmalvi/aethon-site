@@ -424,6 +424,18 @@ h1, h2, h3, h4, h5, h6 {
   animation: background-shine 3s ease-in-out infinite;
 }
 
+/* ── Gradient button fill (avoids Tailwind arbitrary value issues) ── */
+.btn-gradient-fill {
+  background-image: linear-gradient(
+    110deg,
+    var(--btn-fill) 42%,
+    var(--btn-fill-highlight) 50%,
+    var(--btn-fill) 58%
+  );
+  background-size: 250% 100%;
+  animation: background-shine 3s ease-in-out infinite;
+}
+
 /* ── Rotating gradient border (conic spin) ── */
 @keyframes border-spin {
   from { --border-angle: 0deg; }
