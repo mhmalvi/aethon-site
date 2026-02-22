@@ -74,7 +74,7 @@ function CapabilityCard({ index }: { index: number }) {
       <div className="relative z-10 p-7 sm:p-8 lg:p-10 flex flex-col justify-between h-full pointer-events-none">
         <div>
           <div className="flex items-center justify-between mb-8">
-            <span className="font-heading text-sm font-bold text-foreground/30 tracking-widest">
+            <span className="font-heading text-sm font-bold text-foreground/50 tracking-widest">
               0{index + 1}
             </span>
             <div
@@ -151,7 +151,7 @@ export function CapabilitiesGrid() {
                 <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
-            <p className="text-secondary/40 text-xs tracking-wide">
+            <p className="text-secondary/55 text-xs tracking-wide">
               Drag cards to rearrange
             </p>
           </div>

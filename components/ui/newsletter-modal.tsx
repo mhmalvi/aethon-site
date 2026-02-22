@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Mail, ArrowRight, CheckCircle2 } from "lucide-react";
+import { X, Mail, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useLenis } from "lenis/react";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Drawer } from "vaul";
+import { submitForm } from "@/lib/form-submit";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -16,6 +17,7 @@ const STORAGE_KEY = "aethon-newsletter-dismissed";
 export function NewsletterModal() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const triggeredRef = useRef(false);
 
@@ -42,14 +44,29 @@ export function NewsletterModal() {
   }, []);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setSubmitted(true);
-      toast.success("You're on the list!", {
-        description: "Watch your inbox for insights from Aethon.",
-      });
-      sessionStorage.setItem(STORAGE_KEY, "1");
-      setTimeout(() => setOpen(false), 2500);
+      setLoading(true);
+
+      const fd = new FormData(e.currentTarget);
+      const data: Record<string, string> = {
+        email: fd.get("email") as string,
+        _honeypot: fd.get("_honeypot") as string,
+      };
+
+      const result = await submitForm(data, "newsletter");
+      setLoading(false);
+
+      if (result.success) {
+        setSubmitted(true);
+        toast.success("You're on the list!", {
+          description: "Watch your inbox for insights from Aethon.",
+        });
+        sessionStorage.setItem(STORAGE_KEY, "1");
+        setTimeout(() => setOpen(false), 2500);
+      } else {
+        toast.error(result.error || "Something went wrong.");
+      }
     },
     []
   );
@@ -82,8 +99,12 @@ export function NewsletterModal() {
             <div className="h-px w-10 bg-gradient-to-r from-accent-cyan/40 to-transparent mb-5" />
 
             <form onSubmit={handleSubmit} className="space-y-3">
+              {/* Honeypot */}
+              <input type="text" name="_honeypot" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
               <input
                 type="email"
+                name="email"
                 required
                 placeholder="Enter your email"
                 aria-label="Email address"
@@ -94,11 +115,21 @@ export function NewsletterModal() {
                 variant="gradient"
                 size="default"
                 className="w-full group"
+                disabled={loading}
               >
-                Subscribe
-                <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                {loading ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" />
+                    Subscribing...
+                  </>
+                ) : (
+                  <>
+                    Subscribe
+                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </>
+                )}
               </Button>
-              <p className="text-[11px] text-secondary/40 text-center">
+              <p className="text-[11px] text-secondary/55 text-center">
                 Monthly insights. Unsubscribe anytime.
               </p>
             </form>

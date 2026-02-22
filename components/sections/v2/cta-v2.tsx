@@ -3,7 +3,6 @@
 import React, { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
 import { FINAL_CTA } from "@/lib/constants";
@@ -103,7 +102,7 @@ export function CtaV2() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[11px] tracking-[0.2em] uppercase text-foreground/30 font-semibold block mb-6"
+            className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
           >
             09 — Get Started
           </motion.span>

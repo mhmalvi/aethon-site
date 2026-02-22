@@ -78,6 +78,17 @@ export function FaqV2() {
                   onMouseLeave={() => setOpenIndex(null)}
                 >
                   <div
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={isOpen}
+                    onFocus={() => setOpenIndex(i)}
+                    onBlur={() => setOpenIndex(null)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setOpenIndex(isOpen ? null : i);
+                      }
+                    }}
                     className="w-full flex items-center gap-4 sm:gap-5 py-6 sm:py-7 text-left group cursor-default"
                   >
                     {/* Number */}

@@ -2,11 +2,11 @@
 
 import { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { Mail, MapPin, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
+import { Mail, MapPin, Phone, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { TextRandomized } from "@/components/ui/text-randomized";
 import { CONTACT, FOOTER } from "@/lib/constants";
+import { submitForm } from "@/lib/form-submit";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -18,6 +18,7 @@ export function ContactSection() {
   const imageRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [hoveredInfo, setHoveredInfo] = useState<number | null>(null);
 
   // Parallax on decorative image
@@ -51,9 +52,27 @@ export function ContactSection() {
     []
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    const fd = new FormData(e.currentTarget);
+    const data: Record<string, string> = {
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      company: fd.get("company") as string,
+      message: fd.get("message") as string,
+      _honeypot: fd.get("_honeypot") as string,
+    };
+
+    const result = await submitForm(data, "contact");
+    setLoading(false);
+
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      toast.error(result.error || "Something went wrong. Please try again.");
+    }
   };
 
   const infoItems = [
@@ -162,9 +181,13 @@ export function ContactSection() {
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
+                  {/* Honeypot */}
+                  <input type="text" name="_honeypot" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder={CONTACT.form.namePlaceholder}
                       aria-label="Your name"
@@ -172,6 +195,7 @@ export function ContactSection() {
                     />
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder={CONTACT.form.emailPlaceholder}
                       aria-label="Email address"
@@ -180,11 +204,13 @@ export function ContactSection() {
                   </div>
                   <input
                     type="text"
+                    name="company"
                     placeholder={CONTACT.form.companyPlaceholder}
                     aria-label="Company"
                     className={inputClasses}
                   />
                   <textarea
+                    name="message"
                     required
                     rows={5}
                     placeholder={CONTACT.form.messagePlaceholder}
@@ -196,9 +222,19 @@ export function ContactSection() {
                     variant="gradient"
                     size="lg"
                     className="group w-full sm:w-auto"
+                    disabled={loading}
                   >
-                    {CONTACT.form.submitLabel}
-                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    {loading ? (
+                      <>
+                        <Loader2 className="size-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        {CONTACT.form.submitLabel}
+                        <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
                 </motion.form>
               ) : (
@@ -288,7 +324,7 @@ export function ContactSection() {
                         />
                       </motion.div>
                       <div>
-                        <p className="text-[11px] text-secondary/40 uppercase tracking-wider mb-0.5">
+                        <p className="text-[11px] text-secondary/55 uppercase tracking-wider mb-0.5">
                           {item.label}
                         </p>
                         <p

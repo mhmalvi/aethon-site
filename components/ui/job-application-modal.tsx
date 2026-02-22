@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, CheckCircle2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, Briefcase, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +10,7 @@ import {
   ResponsiveModalTrigger,
   ResponsiveModalContent,
 } from "@/components/ui/responsive-modal";
+import { submitForm } from "@/lib/form-submit";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -29,22 +30,44 @@ export function JobApplicationModal({
 }: JobApplicationModalProps) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setSubmitted(true);
-      toast.success("Application received!", {
-        description: "We'll review and get back to you soon.",
-      });
-      setTimeout(() => {
-        setOpen(false);
+      setLoading(true);
+
+      const fd = new FormData(e.currentTarget);
+      const data: Record<string, string> = {
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        phone: fd.get("phone") as string,
+        portfolio: fd.get("portfolio") as string,
+        coverLetter: fd.get("coverLetter") as string,
+        jobTitle,
+        jobType,
+        _honeypot: fd.get("_honeypot") as string,
+      };
+
+      const result = await submitForm(data, "job-application");
+      setLoading(false);
+
+      if (result.success) {
+        setSubmitted(true);
+        toast.success("Application received!", {
+          description: "We'll review and get back to you soon.",
+        });
         setTimeout(() => {
-          setSubmitted(false);
-        }, 300);
-      }, 2000);
+          setOpen(false);
+          setTimeout(() => {
+            setSubmitted(false);
+          }, 300);
+        }, 2000);
+      } else {
+        toast.error(result.error || "Something went wrong.");
+      }
     },
-    []
+    [jobTitle, jobType]
   );
 
   return (
@@ -92,9 +115,13 @@ export function JobApplicationModal({
                 <div className="h-px w-12 bg-gradient-to-r from-accent/50 to-transparent mb-6" />
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot */}
+                  <input type="text" name="_honeypot" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="Full name"
                       aria-label="Full name"
@@ -102,6 +129,7 @@ export function JobApplicationModal({
                     />
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder="Email address"
                       aria-label="Email address"
@@ -111,6 +139,7 @@ export function JobApplicationModal({
 
                   <input
                     type="text"
+                    name="phone"
                     placeholder="Phone number (optional)"
                     aria-label="Phone number"
                     className={inputClasses}
@@ -118,12 +147,14 @@ export function JobApplicationModal({
 
                   <input
                     type="url"
+                    name="portfolio"
                     placeholder="LinkedIn or portfolio URL"
                     aria-label="LinkedIn or portfolio URL"
                     className={inputClasses}
                   />
 
                   <textarea
+                    name="coverLetter"
                     required
                     rows={4}
                     placeholder="Tell us about yourself — your experience, what interests you about this role, and why you'd be a great fit..."
@@ -136,9 +167,19 @@ export function JobApplicationModal({
                     variant="gradient"
                     size="lg"
                     className="w-full group"
+                    disabled={loading}
                   >
-                    Submit Application
-                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    {loading ? (
+                      <>
+                        <Loader2 className="size-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        Submit Application
+                        <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
 
                   <p className="text-[11px] text-secondary/45 text-center">

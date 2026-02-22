@@ -54,12 +54,22 @@ const Circle = forwardRef<
     isPast?: boolean;
     accentColor?: string;
     onClick?: () => void;
+    "aria-label"?: string;
   }
->(({ className, children, isCenter, isActive, isPast, accentColor, onClick }, ref) => {
+>(({ className, children, isCenter, isActive, isPast, accentColor, onClick, "aria-label": ariaLabel }, ref) => {
   return (
     <motion.div
       ref={ref}
       onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={ariaLabel}
+      onKeyDown={onClick ? (e: React.KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      } : undefined}
       className={cn(
         "z-10 flex items-center justify-center rounded-full border-2 bg-surface shadow-lg transition-colors duration-500",
         isCenter
@@ -116,6 +126,7 @@ export function ProcessV2() {
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
   const [activePhase, setActivePhase] = useState<number>(0);
   const [isPaused, setIsPaused] = useState(false);
+  const timerKeyRef = useRef(0);
 
   // Refs for beam endpoints
   const centerRef = useRef<HTMLDivElement>(null);
@@ -131,6 +142,7 @@ export function ProcessV2() {
     if (!isInView || isPaused) return;
 
     const interval = setInterval(() => {
+      timerKeyRef.current += 1;
       setActivePhase((prev) => (prev + 1) % 5);
     }, AUTO_CYCLE_INTERVAL);
 
@@ -205,6 +217,7 @@ export function ProcessV2() {
                     isPast={activePhase > 0}
                     accentColor={nodeAccents[0].color}
                     onClick={() => handleNodeClick(0)}
+                    aria-label="Go to phase 1: Discover"
                   >
                     <Search
                       className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-500"
@@ -233,6 +246,7 @@ export function ProcessV2() {
                     isPast={activePhase > 1}
                     accentColor={nodeAccents[1].color}
                     onClick={() => handleNodeClick(1)}
+                    aria-label="Go to phase 2: Architect"
                   >
                     <PenTool
                       className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-500"
@@ -265,6 +279,7 @@ export function ProcessV2() {
                     isPast={activePhase > 2}
                     accentColor={nodeAccents[2].color}
                     onClick={() => handleNodeClick(2)}
+                    aria-label="Go to phase 3: Engineer"
                   >
                     <Wrench
                       className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-500"
@@ -305,6 +320,7 @@ export function ProcessV2() {
                     isPast={activePhase > 3}
                     accentColor={nodeAccents[3].color}
                     onClick={() => handleNodeClick(3)}
+                    aria-label="Go to phase 4: Deploy"
                   >
                     <Rocket
                       className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-500"
@@ -337,6 +353,7 @@ export function ProcessV2() {
                     isPast={false}
                     accentColor={nodeAccents[4].color}
                     onClick={() => handleNodeClick(4)}
+                    aria-label="Go to phase 5: Evolve"
                   >
                     <TrendingUp
                       className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-500"
@@ -425,10 +442,11 @@ export function ProcessV2() {
           <div className="mt-14 min-h-[200px] flex flex-col items-center">
             {/* Progress dots */}
             <div className="flex justify-center gap-2 mb-8">
-              {HOW_WE_WORK.phases.map((_, i) => (
+              {HOW_WE_WORK.phases.map((phase, i) => (
                 <button
                   key={i}
                   onClick={() => handleNodeClick(i)}
+                  aria-label={`Go to phase ${i + 1}: ${phase.title}`}
                   className="relative group"
                 >
                   <motion.div
@@ -460,7 +478,7 @@ export function ProcessV2() {
                         duration: AUTO_CYCLE_INTERVAL / 1000,
                         ease: "linear",
                       }}
-                      key={`timer-${activePhase}-${Date.now()}`}
+                      key={`timer-${activePhase}-${timerKeyRef.current}`}
                     />
                   )}
                 </button>

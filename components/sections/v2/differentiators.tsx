@@ -3,7 +3,6 @@
 import { useRef, useCallback, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { Code2, ShieldCheck, GitBranch, Infinity, ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
 import { WHY_CHOOSE_US } from "@/lib/constants";

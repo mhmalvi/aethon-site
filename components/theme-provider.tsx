@@ -26,16 +26,17 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("aethon-theme") as Theme) || "dark";
+    }
+    return "dark";
+  });
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("aethon-theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.setAttribute("data-theme", stored);
-    }
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const toggleTheme = useCallback(() => {
     setIsTransitioning(true);

@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-[80vh] flex items-center justify-center px-6 sm:px-8 lg:px-16 xl:px-24">
+      <main id="main-content" className="relative min-h-[80vh] flex items-center justify-center px-6 sm:px-8 lg:px-16 xl:px-24">
         {/* Ambient glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div

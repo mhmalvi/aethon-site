@@ -16,7 +16,7 @@ export default function CaseStudiesPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <CaseStudiesHero />
         <CaseStudiesList />
         <CtaV2 />

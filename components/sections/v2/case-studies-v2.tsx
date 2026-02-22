@@ -223,7 +223,7 @@ export function CaseStudiesV2() {
                   />
                 </div>
               ))}
-              <span className="text-[11px] text-foreground/30 font-mono ml-2">
+              <span className="text-[11px] text-foreground/50 font-mono ml-2">
                 {String(activeIndex + 1).padStart(2, "0")}/{String(studyCount).padStart(2, "0")}
               </span>
             </div>

@@ -18,14 +18,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Aethon — Digital Systems & Automation Partner",
   description:
-    "We design, build, and run reliable business systems — combining automation, AI, software, and security.",
+    "Engineering reliable business systems — automation, AI, custom software, and security for companies that need to move faster.",
 };
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <HeroV2 />
         <CredibilityMarquee />
         <Manifesto />

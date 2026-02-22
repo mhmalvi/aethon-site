@@ -75,7 +75,7 @@ export function FooterV2() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-12 lg:gap-14">
               {linkGroups.map((group, gi) => (
                 <div key={group.title}>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary/40 mb-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary/55 mb-5">
                     {group.title}
                   </p>
                   <nav className="flex flex-col gap-3">
@@ -127,7 +127,7 @@ export function FooterV2() {
                     {num}
                   </a>
                 ))}
-                <span className="text-secondary/20 hidden sm:inline">|</span>
+                <span className="text-secondary/35 hidden sm:inline">|</span>
                 <p className="text-sm text-secondary/50">
                   {FOOTER.contact.address}
                 </p>
@@ -179,12 +179,12 @@ export function FooterV2() {
               {FOOTER.copyright}
             </span>
             <div className="flex gap-6 sm:gap-8 items-center">
-              <span className="text-[11px] text-secondary/40 hidden sm:block">
+              <span className="text-[11px] text-secondary/55 hidden sm:block">
                 {FOOTER.contact.location}
               </span>
               <button
                 onClick={scrollToTop}
-                className="text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/40 hover:text-accent transition-all duration-300 cursor-pointer hover:-translate-y-0.5"
+                className="text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/55 hover:text-accent transition-all duration-300 cursor-pointer hover:-translate-y-0.5"
               >
                 Back to top &uarr;
               </button>

@@ -16,7 +16,7 @@ function LogoItem({ name }: { name: string }) {
           {name.slice(0, 2).toUpperCase()}
         </span>
       </div>
-      <span className="text-sm font-medium text-secondary/40 whitespace-nowrap tracking-wide">
+      <span className="text-sm font-medium text-secondary/55 whitespace-nowrap tracking-wide">
         {name}
       </span>
     </div>

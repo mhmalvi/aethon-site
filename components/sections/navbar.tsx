@@ -153,7 +153,7 @@ function DesktopDropdown({
                           <span className="text-sm font-medium text-foreground/90 group-hover/item:text-foreground block leading-tight">
                             {child.label}
                           </span>
-                          <span className="text-xs text-secondary/40 group-hover/item:text-secondary/60 block mt-0.5 leading-snug transition-colors duration-200">
+                          <span className="text-xs text-secondary/55 group-hover/item:text-secondary/60 block mt-0.5 leading-snug transition-colors duration-200">
                             {child.tagline}
                           </span>
                         </div>
@@ -253,7 +253,7 @@ function MobileNavItem({
                       className="flex items-center gap-3 py-2.5 text-sm text-secondary/70 hover:text-foreground transition-colors"
                       onClick={onClose}
                     >
-                      {Icon && <Icon className="w-4 h-4 text-secondary/40" />}
+                      {Icon && <Icon className="w-4 h-4 text-secondary/55" />}
                       {child.label}
                     </Link>
                   </motion.div>
@@ -352,6 +352,7 @@ export function Navbar() {
             className="p-2 text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

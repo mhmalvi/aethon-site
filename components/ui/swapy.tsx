@@ -48,7 +48,7 @@ export const SwapyLayout = ({
     if (!container) return;
     if (typeof window === 'undefined') return;
 
-    let instance: { destroy: () => void; onSwap: (cb: (e: any) => void) => void } | null = null;
+    let instance: { destroy: () => void; onSwap: (cb: (e: { newSlotItemMap: { asArray: unknown[] } }) => void) => void } | null = null;
 
     const init = async () => {
       try {
@@ -59,8 +59,8 @@ export const SwapyLayout = ({
         if (onSwap && instance) {
           instance.onSwap(onSwap);
         }
-      } catch (err) {
-        console.warn('[Swapy] Failed to initialize:', err);
+      } catch {
+        // Swapy initialization failed — non-critical
       }
     };
 

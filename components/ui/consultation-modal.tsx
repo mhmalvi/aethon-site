@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +10,7 @@ import {
   ResponsiveModalTrigger,
   ResponsiveModalContent,
 } from "@/components/ui/responsive-modal";
+import { submitForm } from "@/lib/form-submit";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -31,25 +32,44 @@ interface ConsultationModalProps {
 export function ConsultationModal({ children }: ConsultationModalProps) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setSubmitted(true);
-      toast.success("We'll be in touch within one business day.", {
-        description: "Thanks for reaching out!",
-      });
-      setTimeout(() => {
-        setOpen(false);
-        // Reset after close animation
+      setLoading(true);
+
+      const fd = new FormData(e.currentTarget);
+      const data: Record<string, string> = {
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        company: fd.get("company") as string,
+        service: selectedService || "",
+        message: fd.get("message") as string,
+        _honeypot: fd.get("_honeypot") as string,
+      };
+
+      const result = await submitForm(data, "consultation");
+      setLoading(false);
+
+      if (result.success) {
+        setSubmitted(true);
+        toast.success("We'll be in touch within one business day.", {
+          description: "Thanks for reaching out!",
+        });
         setTimeout(() => {
-          setSubmitted(false);
-          setSelectedService(null);
-        }, 300);
-      }, 2000);
+          setOpen(false);
+          setTimeout(() => {
+            setSubmitted(false);
+            setSelectedService(null);
+          }, 300);
+        }, 2000);
+      } else {
+        toast.error(result.error || "Something went wrong.");
+      }
     },
-    []
+    [selectedService]
   );
 
   return (
@@ -86,9 +106,13 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
                 <div className="h-px w-12 bg-gradient-to-r from-accent/50 to-transparent mb-6" />
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Honeypot */}
+                  <input type="text" name="_honeypot" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="Your name"
                       aria-label="Your name"
@@ -96,6 +120,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
                     />
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder="Email address"
                       aria-label="Email address"
@@ -105,6 +130,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
 
                   <input
                     type="text"
+                    name="company"
                     placeholder="Company"
                     aria-label="Company"
                     className={inputClasses}
@@ -112,7 +138,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
 
                   {/* Service selection pills */}
                   <div>
-                    <label className="text-xs text-secondary/40 uppercase tracking-wider font-medium block mb-2.5">
+                    <label className="text-xs text-secondary/55 uppercase tracking-wider font-medium block mb-2.5">
                       What do you need?
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -138,6 +164,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
                   </div>
 
                   <textarea
+                    name="message"
                     rows={3}
                     placeholder="Tell us about your project or challenge..."
                     aria-label="Project description"
@@ -149,9 +176,19 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
                     variant="gradient"
                     size="lg"
                     className="w-full group"
+                    disabled={loading}
                   >
-                    Send Message
-                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    {loading ? (
+                      <>
+                        <Loader2 className="size-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <ArrowRight className="ml-1.5 size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
 
                   <p className="text-[11px] text-secondary/45 text-center">

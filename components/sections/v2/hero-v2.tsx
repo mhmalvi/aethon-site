@@ -124,10 +124,10 @@ export function HeroV2() {
           </motion.div>
 
           {/* Headline — staggered clip reveal with blur */}
-          <div className="mb-8 sm:mb-10">
+          <h1 className="mb-8 sm:mb-10">
             {headlineLines.map((line, i) => (
               <div key={line.text} className="overflow-hidden">
-                <motion.h1
+                <motion.span
                   initial={{ y: "120%", opacity: 0, filter: "blur(8px)" }}
                   animate={
                     isInView
@@ -139,13 +139,14 @@ export function HeroV2() {
                     delay: 0.3 + i * 0.1,
                     ease: EASE,
                   }}
+                  style={{ display: "block" }}
                   className={`font-heading text-[14vw] sm:text-[10vw] md:text-[8vw] lg:text-[6vw] xl:text-[5.2vw] 2xl:text-[4.5vw] leading-[1.06] tracking-[-0.03em] ${line.className}`}
                 >
                   {line.text}
-                </motion.h1>
+                </motion.span>
               </div>
             ))}
-          </div>
+          </h1>
 
           {/* Subtext */}
           <motion.p

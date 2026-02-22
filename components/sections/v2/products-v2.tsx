@@ -94,7 +94,7 @@ function StackingCard({ index, total }: { index: number; total: number }) {
                 >
                   <Icon className="w-6 h-6" style={{ color: color.accent }} />
                 </div>
-                <span className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-foreground/30">
+                <span className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-foreground/50">
                   Feature 0{index + 1}
                 </span>
               </div>

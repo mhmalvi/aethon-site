@@ -16,7 +16,7 @@ export default function InsightsPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <InsightsHero />
         <InsightsGrid />
         <CtaV2 />

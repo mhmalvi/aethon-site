@@ -19,10 +19,7 @@ export function AnimatedCounter({ value, className }: AnimatedCounterProps) {
   const suffix = numericMatch ? value.slice(numericMatch[1].length) : value;
 
   useEffect(() => {
-    if (!isInView || numericPart === null) {
-      setDisplayed(value);
-      return;
-    }
+    if (!isInView || numericPart === null) return;
 
     let frame: number;
     const duration = 1500;

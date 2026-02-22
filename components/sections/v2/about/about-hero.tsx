@@ -67,7 +67,7 @@ export function AboutHero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-[11px] tracking-[0.2em] uppercase text-foreground/30 font-semibold block mb-6"
+          className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
         >
           <TextRandomized text={ABOUT.hero.badge} />
         </motion.span>

@@ -96,7 +96,7 @@ export function CaseStudyDetailHero({ studyIndex }: { studyIndex: number }) {
         >
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/30 hover:text-foreground/60 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/50 hover:text-foreground/60 transition-colors duration-200"
           >
             <ArrowLeft className="w-3 h-3" />
             All Case Studies
@@ -107,7 +107,7 @@ export function CaseStudyDetailHero({ studyIndex }: { studyIndex: number }) {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-[11px] tracking-[0.2em] uppercase text-foreground/30 font-semibold block mb-6"
+          className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
         >
           <TextRandomized text={study.industry} />
         </motion.span>
@@ -193,9 +193,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
             >
               {/* Challenge */}
               <div className="mb-12">
-                <h3 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-4">
+                <h2 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-4">
                   The Challenge
-                </h3>
+                </h2>
                 <p className="text-secondary/70 text-base sm:text-lg leading-relaxed">
                   {study.problem}
                 </p>
@@ -203,9 +203,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
 
               {/* Solution */}
               <div className="mb-12">
-                <h3 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-4">
+                <h2 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-4">
                   Our Solution
-                </h3>
+                </h2>
                 <p className="text-secondary/70 text-base sm:text-lg leading-relaxed">
                   {study.solution}
                 </p>
@@ -213,9 +213,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
 
               {/* Approach */}
               <div className="mb-12">
-                <h3 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-6">
+                <h2 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-6">
                   Approach
-                </h3>
+                </h2>
                 <ul className="space-y-4">
                   {study.approach.map((step, i) => (
                     <motion.li
@@ -242,9 +242,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
 
               {/* Results */}
               <div className="mb-12">
-                <h3 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-6">
+                <h2 className="font-heading text-xs font-bold tracking-[0.2em] uppercase text-secondary/45 mb-6">
                   Results
-                </h3>
+                </h2>
                 <ul className="space-y-4">
                   {study.results.map((result, i) => (
                     <motion.li
@@ -299,9 +299,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
                 background: `linear-gradient(135deg, ${accent.bg}, transparent)`,
               }}
             >
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary/40 mb-5">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary/55 mb-5">
                 Technology Stack
-              </h4>
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {study.tech.map((t) => (
                   <span
@@ -341,9 +341,9 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
               transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
               className="mt-6 rounded-2xl border border-border p-6"
             >
-              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary/40 mb-4">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-secondary/55 mb-4">
                 Other Case Studies
-              </h4>
+              </h3>
               <nav className="space-y-2">
                 {CASE_STUDIES.studies.map((s, i) => {
                   if (i === studyIndex) return null;

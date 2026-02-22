@@ -158,7 +158,7 @@ export function ResponsiveModalContent({
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-secondary/40 hover:text-foreground hover:bg-surface-subtle transition-all duration-200"
+                className="absolute top-4 right-4 z-20 p-1.5 rounded-lg text-secondary/55 hover:text-foreground hover:bg-surface-subtle transition-all duration-200"
                 aria-label="Close"
               >
                 <X className="w-4 h-4" />

@@ -16,7 +16,7 @@ export default function CareersPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <CareersHero />
         <CareersContent />
         <CtaV2 />

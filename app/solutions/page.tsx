@@ -16,7 +16,7 @@ export default function SolutionsPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <SolutionsHero />
         <SolutionsPillars />
         <CtaV2 />

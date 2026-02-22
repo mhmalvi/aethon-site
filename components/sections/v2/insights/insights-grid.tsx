@@ -117,7 +117,7 @@ export function InsightsGrid() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <div className="flex items-center gap-3 text-[11px] text-secondary/40 mb-3">
+                  <div className="flex items-center gap-3 text-[11px] text-secondary/55 mb-3">
                     <span>{formatDate(post.date)}</span>
                     <span className="w-1 h-1 rounded-full bg-secondary/20" />
                     <span className="inline-flex items-center gap-1">

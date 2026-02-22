@@ -16,7 +16,7 @@ export default function ProductsPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <ProductsHero />
         <ProductsFeatures />
         <CtaV2 />

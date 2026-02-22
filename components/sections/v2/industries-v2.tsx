@@ -67,6 +67,17 @@ export function IndustriesV2() {
                 onMouseLeave={() => setExpanded(null)}
               >
                 <div
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isOpen}
+                  onFocus={() => setExpanded(industry.id)}
+                  onBlur={() => setExpanded(null)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setExpanded(isOpen ? null : industry.id);
+                    }
+                  }}
                   className="w-full flex items-center gap-4 sm:gap-6 lg:gap-10 py-6 sm:py-8 text-left group cursor-default"
                 >
                   {/* Number */}

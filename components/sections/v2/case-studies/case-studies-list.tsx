@@ -139,7 +139,7 @@ export function CaseStudiesList() {
                           <span className="block font-heading text-2xl font-bold gradient-text-accent">
                             {study.metric}
                           </span>
-                          <span className="text-[11px] text-secondary/40 tracking-wide">
+                          <span className="text-[11px] text-secondary/55 tracking-wide">
                             {study.metricLabel}
                           </span>
                         </div>
@@ -147,7 +147,7 @@ export function CaseStudiesList() {
                           <span className="block font-heading text-2xl font-bold text-accent-cyan">
                             {study.secondaryMetric}
                           </span>
-                          <span className="text-[11px] text-secondary/40 tracking-wide">
+                          <span className="text-[11px] text-secondary/55 tracking-wide">
                             {study.secondaryLabel}
                           </span>
                         </div>

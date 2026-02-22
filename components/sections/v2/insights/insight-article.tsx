@@ -161,9 +161,9 @@ export function InsightArticle({ postIndex }: { postIndex: number }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="rounded-2xl border border-accent/20 bg-accent/[0.03] p-8 sm:p-10"
             >
-              <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-tight mb-3">
+              <h2 className="font-heading text-xl sm:text-2xl font-bold tracking-tight mb-3">
                 Want to discuss this topic?
-              </h3>
+              </h2>
               <p className="text-secondary/60 text-sm leading-relaxed mb-6">
                 Our team has deep experience in {post.category.toLowerCase()}.
                 Let&apos;s explore how these ideas apply to your business.
@@ -223,7 +223,7 @@ export function InsightArticle({ postIndex }: { postIndex: number }) {
                       <h3 className="font-heading text-base font-bold tracking-tight mb-2 transition-colors duration-300 group-hover:text-accent line-clamp-2">
                         {related.title}
                       </h3>
-                      <span className="text-xs text-secondary/40">
+                      <span className="text-xs text-secondary/55">
                         {related.readTime}
                       </span>
                     </div>
