@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "motion/react";
 import { Workflow, Brain, Code2, Shield, ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SOLUTIONS } from "@/lib/constants";
 
@@ -87,11 +88,12 @@ function PillarCard({ index }: { index: number }) {
             isReversed ? "lg:order-2" : ""
           }`}
         >
-          <img
+          <Image
             src={pillar.image}
             alt={pillar.title}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 ease-out"
+            fill
+            className="object-cover transition-transform duration-700 ease-out"
+            sizes="(max-width: 1024px) 100vw, 50vw"
             style={{
               transform: hovered ? "scale(1.05)" : "scale(1)",
               filter: hovered
@@ -106,7 +108,7 @@ function PillarCard({ index }: { index: number }) {
             <span className="font-heading text-5xl sm:text-6xl font-bold gradient-text-accent leading-none block">
               {pillar.metric}
             </span>
-            <span className="text-[11px] text-foreground/50 mt-1.5 block tracking-wider uppercase font-medium">
+            <span className="text-xs text-foreground/50 mt-1.5 block tracking-wider uppercase font-medium">
               {pillar.metricLabel}
             </span>
           </div>
@@ -228,7 +230,7 @@ export function SolutionsPillars() {
           transition={{ duration: 0.6 }}
           className="mb-14 sm:mb-20"
         >
-          <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+          <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
             What We Build
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-3xl">

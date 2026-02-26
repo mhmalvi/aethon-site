@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
 import { TextRandomized } from "@/components/ui/text-randomized";
 import { SOLUTIONS } from "@/lib/constants";
 
@@ -25,10 +26,13 @@ export function SolutionsHero() {
       {/* Parallax background */}
       <div className="absolute inset-0">
         <motion.div style={{ y: bgY }} className="absolute inset-[-20%]">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&h=900&fit=crop"
             alt=""
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
         </motion.div>
         <div className="absolute inset-0 bg-background/82" />
@@ -67,7 +71,7 @@ export function SolutionsHero() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
+          className="text-xs tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
         >
           <TextRandomized text={SOLUTIONS.sectionLabel} />
         </motion.span>

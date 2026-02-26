@@ -4,6 +4,7 @@ import { forwardRef, useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import { Search, PenTool, Wrench, Rocket, TrendingUp } from "lucide-react";
 import { HOW_WE_WORK } from "@/lib/constants";
+import Image from "next/image";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { cn } from "@/lib/utils";
 
@@ -185,7 +186,7 @@ export function ProcessV2() {
           transition={{ duration: 0.6 }}
           className="mb-16 sm:mb-24"
         >
-          <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+          <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
             05 — {HOW_WE_WORK.sectionLabel}
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-3xl">
@@ -305,9 +306,11 @@ export function ProcessV2() {
                 {/* Center hub */}
                 <Circle ref={centerRef} isCenter>
                   <div className="flex flex-col items-center">
-                    <img
+                    <Image
                       src="/aethon-icon.png"
                       alt="Aethon"
+                      width={64}
+                      height={64}
                       className="h-14 sm:h-16 w-auto dark:invert"
                     />
                   </div>
@@ -447,40 +450,42 @@ export function ProcessV2() {
                   key={i}
                   onClick={() => handleNodeClick(i)}
                   aria-label={`Go to phase ${i + 1}: ${phase.title}`}
-                  className="relative group"
+                  className="group p-3"
                 >
-                  <motion.div
-                    className="rounded-full"
-                    animate={{
-                      width: i === activePhase ? 32 : 8,
-                      height: 8,
-                      backgroundColor:
-                        i === activePhase
-                          ? nodeAccents[i].color
-                          : i < activePhase
-                            ? `${nodeAccents[i].color}`
-                            : "var(--border-light)",
-                      opacity: i === activePhase ? 1 : i < activePhase ? 0.5 : 0.3,
-                    }}
-                    transition={{ duration: 0.4, ease: EASE }}
-                  />
-                  {/* Timer bar inside active dot */}
-                  {i === activePhase && !isPaused && (
+                  <div className="relative">
                     <motion.div
-                      className="absolute inset-0 rounded-full origin-left"
-                      style={{
-                        backgroundColor: nodeAccents[i].color,
-                        filter: "brightness(1.3)",
+                      className="rounded-full"
+                      animate={{
+                        width: i === activePhase ? 32 : 8,
+                        height: 8,
+                        backgroundColor:
+                          i === activePhase
+                            ? nodeAccents[i].color
+                            : i < activePhase
+                              ? `${nodeAccents[i].color}`
+                              : "var(--border-light)",
+                        opacity: i === activePhase ? 1 : i < activePhase ? 0.5 : 0.3,
                       }}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{
-                        duration: AUTO_CYCLE_INTERVAL / 1000,
-                        ease: "linear",
-                      }}
-                      key={`timer-${activePhase}-${timerKeyRef.current}`}
+                      transition={{ duration: 0.4, ease: EASE }}
                     />
-                  )}
+                    {/* Timer bar inside active dot */}
+                    {i === activePhase && !isPaused && (
+                      <motion.div
+                        className="absolute inset-0 rounded-full origin-left"
+                        style={{
+                          backgroundColor: nodeAccents[i].color,
+                          filter: "brightness(1.3)",
+                        }}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{
+                          duration: AUTO_CYCLE_INTERVAL / 1000,
+                          ease: "linear",
+                        }}
+                        key={`timer-${activePhase}-${timerKeyRef.current}`}
+                      />
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
@@ -539,7 +544,7 @@ export function ProcessV2() {
                     transition={{ duration: 0.35, delay: 0.08 }}
                   >
                     <span
-                      className="text-[10px] tracking-[0.2em] uppercase font-bold px-3.5 py-1 rounded-full border"
+                      className="text-xs tracking-[0.2em] uppercase font-bold px-3.5 py-1 rounded-full border"
                       style={{
                         background: accent.bg,
                         color: accent.color,
@@ -549,7 +554,7 @@ export function ProcessV2() {
                       Phase 0{HOW_WE_WORK.phases[activePhase].number}
                     </span>
                     <span
-                      className="text-[11px] font-semibold tracking-wide"
+                      className="text-xs font-semibold tracking-wide"
                       style={{ color: accent.color }}
                     >
                       {HOW_WE_WORK.phases[activePhase].subtitle}
@@ -660,13 +665,13 @@ export function ProcessV2() {
                   </motion.div>
 
                   <div className="pt-1 flex-1">
-                    <span className="font-heading text-[10px] font-bold text-secondary/35 tracking-[0.2em] uppercase mb-1.5 block">
+                    <span className="font-heading text-xs font-bold text-secondary/35 tracking-[0.2em] uppercase mb-1.5 block">
                       Phase 0{phase.number}
                     </span>
                     <h3 className="font-heading text-lg font-bold tracking-tight mb-1">
                       {phase.title}
                     </h3>
-                    <p className="text-[11px] font-semibold mb-2" style={{ color: nodeAccents[i].color }}>
+                    <p className="text-xs font-semibold mb-2" style={{ color: nodeAccents[i].color }}>
                       {phase.subtitle}
                     </p>
                     <p className="text-sm text-secondary/60 leading-relaxed">

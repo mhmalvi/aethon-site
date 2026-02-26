@@ -83,7 +83,7 @@ export function AboutValues() {
           transition={{ duration: 0.6 }}
           className="mb-14 sm:mb-20"
         >
-          <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+          <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
             01 — Our Values
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-2xl">

@@ -20,7 +20,7 @@ export const NAV_LINKS = [
     ],
   },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Insights", href: "/insights" },
+  { label: "Insights", href: "https://insights.aethonautomation.com" },
   { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
 ] as const;
@@ -42,12 +42,12 @@ export const HERO = {
 export const CREDIBILITY = {
   trustLine: "Engineering operational capability for forward-thinking companies",
   logos: [
-    "TechCorp",
-    "FinanceHub",
-    "LogiFlow",
-    "MedSecure",
-    "RetailOS",
-    "CloudNine",
+    "Stripe",
+    "Notion",
+    "Datadog",
+    "Twilio",
+    "Cloudflare",
+    "HashiCorp",
   ],
 } as const;
 
@@ -518,74 +518,6 @@ export const CONTACT = {
   },
 } as const;
 
-export const INSIGHTS = {
-  headline: "Insights & perspectives",
-  subtext:
-    "Practical thinking on systems engineering, AI in production, and building technology that lasts.",
-  posts: [
-    {
-      title: "Why most AI projects fail before production",
-      category: "AI Strategy",
-      date: "2025-11-15",
-      excerpt:
-        "The gap between a working prototype and a production AI system is wider than most teams expect. Here's what separates the projects that ship from those that stall.",
-      image:
-        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-      readTime: "6 min read",
-    },
-    {
-      title: "Zero-trust architecture for mid-market companies",
-      category: "Security",
-      date: "2025-10-22",
-      excerpt:
-        "You don't need enterprise-grade budgets to implement zero-trust. A practical framework for companies with 50–500 employees.",
-      image:
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop",
-      readTime: "8 min read",
-    },
-    {
-      title: "The real cost of manual operations at scale",
-      category: "Automation",
-      date: "2025-09-18",
-      excerpt:
-        "Manual processes that work at 10 employees break at 100. We break down the hidden costs and the inflection points where automation pays for itself.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-      readTime: "5 min read",
-    },
-    {
-      title: "Building internal platforms your team will actually use",
-      category: "Engineering",
-      date: "2025-08-30",
-      excerpt:
-        "The best internal tools are the ones nobody notices. Lessons from deploying developer and operational platforms across regulated industries.",
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
-      readTime: "7 min read",
-    },
-    {
-      title: "Compliance automation: beyond the checkbox",
-      category: "Compliance",
-      date: "2025-08-12",
-      excerpt:
-        "Automated compliance isn't about passing audits faster — it's about building systems where compliance is a natural byproduct of good architecture.",
-      image:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
-      readTime: "6 min read",
-    },
-    {
-      title: "From legacy to modern: migration without the midnight outages",
-      category: "Modernization",
-      date: "2025-07-25",
-      excerpt:
-        "A phased approach to replacing critical business systems that keeps operations running while you build what's next.",
-      image:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      readTime: "9 min read",
-    },
-  ],
-} as const;
-
 export const CAREERS = {
   headline: "Build what matters.",
   subtext:
@@ -662,14 +594,14 @@ export const FOOTER = {
     ],
     resources: [
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Insights", href: "/insights" },
+      { label: "Insights", href: "https://insights.aethonautomation.com" },
       { label: "How We Work", href: "/#process" },
     ],
   },
   contact: {
     email: "info@aethonautomation.com",
     phone: ["+1 (830) 754-4901", "+880 1710 895523"],
-    address: "123 Denver, CO 80203, USA",
+    address: "23 Denver, CO 80203, USA",
     location: "Denver, CO — Global Delivery",
   },
   social: [

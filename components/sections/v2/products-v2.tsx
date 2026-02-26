@@ -192,7 +192,7 @@ export function ProductsV2() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               04 — {PRODUCTS.sectionLabel}
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-xl">

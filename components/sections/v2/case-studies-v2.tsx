@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CASE_STUDIES } from "@/lib/constants";
 
@@ -59,11 +60,12 @@ function CaseStudyPanel({
     <div className="flex-shrink-0 w-full h-full">
       <div className="relative h-full rounded-2xl overflow-hidden border border-border group">
         {/* Background image */}
-        <img
+        <Image
           src={study.image}
           alt={study.title}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -98,7 +100,7 @@ function CaseStudyPanel({
               <span className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold gradient-text-accent leading-none block">
                 {study.metric}
               </span>
-              <p className="text-[11px] text-foreground/50 mt-2 tracking-wider uppercase font-medium">
+              <p className="text-xs text-foreground/50 mt-2 tracking-wider uppercase font-medium">
                 {study.metricLabel}
               </p>
             </div>
@@ -126,6 +128,7 @@ function CaseStudyPanel({
 
 export function CaseStudiesV2() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const studyCount = CASE_STUDIES.studies.length;
@@ -135,12 +138,28 @@ export function CaseStudiesV2() {
     offset: ["start start", "end end"],
   });
 
-  // Map vertical scroll to horizontal translate
-  const x = useTransform(
-    scrollYProgress,
-    [0.1, 0.9],
-    ["0%", `-${(studyCount - 1) * 100}%`]
-  );
+  // Measure card stride (card width + gap) for pixel-based horizontal scroll
+  const strideRef = useRef(0);
+  useEffect(() => {
+    const measure = () => {
+      const track = trackRef.current;
+      if (!track || track.children.length < 2) return;
+      strideRef.current =
+        (track.children[1] as HTMLElement).offsetLeft -
+        (track.children[0] as HTMLElement).offsetLeft;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // Map vertical scroll to horizontal translate using measured stride
+  const x = useTransform(scrollYProgress, (v) => {
+    const stride = strideRef.current;
+    if (stride === 0) return 0;
+    const t = Math.max(0, Math.min(1, (v - 0.1) / 0.8));
+    return -(t * (studyCount - 1) * stride);
+  });
 
   // Track progress for active indicator
   const progress = useTransform(scrollYProgress, [0.1, 0.9], [0, studyCount - 1]);
@@ -164,7 +183,7 @@ export function CaseStudiesV2() {
         {/* Section header */}
         <div className="pt-16 sm:pt-20 pb-6 sm:pb-8 px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-[1440px] mx-auto">
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-3">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-3">
               03 — {CASE_STUDIES.sectionLabel}
             </span>
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 lg:gap-12">
@@ -191,6 +210,7 @@ export function CaseStudiesV2() {
         <div className="flex-1 h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)] px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-[1440px] mx-auto h-full relative">
             <motion.div
+              ref={trackRef}
               className="flex h-full gap-6 lg:gap-8"
               style={{ x }}
             >
@@ -223,7 +243,7 @@ export function CaseStudiesV2() {
                   />
                 </div>
               ))}
-              <span className="text-[11px] text-foreground/50 font-mono ml-2">
+              <span className="text-xs text-foreground/50 font-mono ml-2">
                 {String(activeIndex + 1).padStart(2, "0")}/{String(studyCount).padStart(2, "0")}
               </span>
             </div>

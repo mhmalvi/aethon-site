@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { Mail, MapPin, Phone, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CONTACT, FOOTER } from "@/lib/constants";
 import { submitForm } from "@/lib/form-submit";
@@ -158,7 +159,7 @@ export function ContactSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               01 — Send a Message
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight mb-4">
@@ -267,7 +268,7 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col justify-between"
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-6">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-6">
               02 — Contact Info
             </span>
             {/* Contact info boxes with tilt + spotlight */}
@@ -324,7 +325,7 @@ export function ContactSection() {
                         />
                       </motion.div>
                       <div>
-                        <p className="text-[11px] text-secondary/55 uppercase tracking-wider mb-0.5">
+                        <p className="text-xs text-secondary/55 uppercase tracking-wider mb-0.5">
                           {item.label}
                         </p>
                         <p
@@ -349,11 +350,12 @@ export function ContactSection() {
               className="relative rounded-2xl overflow-hidden aspect-[4/3] border border-border shadow-xl shadow-black/20 group"
             >
               <motion.div style={{ y: imageY }} className="absolute inset-[-15%]">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop"
                   alt="Team collaboration"
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-70 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-80"
+                  fill
+                  className="object-cover opacity-70 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-80"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-background/10" />

@@ -190,7 +190,7 @@ export function JobApplicationModal({
                     )}
                   </Button>
 
-                  <p className="text-[11px] text-secondary/45 text-center">
+                  <p className="text-xs text-secondary/45 text-center">
                     We review every application and respond within 5 business days.
                   </p>
                 </form>

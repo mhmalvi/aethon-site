@@ -2,6 +2,7 @@
 
 import { useRef, useCallback, useState } from "react";
 import { motion, useInView } from "motion/react";
+import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -64,11 +65,12 @@ export function AboutFounder() {
               "--spot-color": "rgba(99,102,241,0.06)",
             } as React.CSSProperties}
           >
-            <img
-              src="/muhammadhmalvi.png"
+            <Image
+              src="/muhammadhmalvi.webp"
               alt="Muhammad H. Malvi — Founder & CEO"
-              loading="lazy"
-              className="w-full h-full object-cover object-top transition-transform duration-700 ease-out"
+              fill
+              className="object-cover object-top transition-transform duration-700 ease-out"
+              sizes="(max-width: 1024px) 100vw, 448px"
               style={{
                 transform: hovered ? "scale(1.03)" : "scale(1)",
               }}
@@ -92,7 +94,7 @@ export function AboutFounder() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               Leadership
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6">

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SOLUTIONS, PRODUCTS, CASE_STUDIES, INSIGHTS } from "@/lib/constants";
+import { SOLUTIONS, PRODUCTS, CASE_STUDIES } from "@/lib/constants";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aethonautomation.com";
 
@@ -13,9 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/solutions",
     "/products",
     "/case-studies",
-    "/insights",
     "/contact",
     "/careers",
+    "/privacy",
+    "/terms",
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
@@ -44,12 +45,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const insightPages = INSIGHTS.posts.map((post) => ({
-    url: `${siteUrl}/insights/${slugify(post.title)}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  return [...staticPages, ...solutionPages, ...productPages, ...caseStudyPages, ...insightPages];
+  return [...staticPages, ...solutionPages, ...productPages, ...caseStudyPages];
 }

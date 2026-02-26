@@ -3,6 +3,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
 import { FINAL_CTA } from "@/lib/constants";
@@ -50,11 +51,12 @@ export function CtaV2() {
       {/* Background image — parallax + lighter treatment */}
       <div className="absolute inset-0">
         <motion.div style={{ y: bgY }} className="absolute inset-[-10%]">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=900&fit=crop"
             alt=""
-            loading="lazy"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
           />
         </motion.div>
         <div className="absolute inset-0 bg-background/75" />
@@ -102,7 +104,7 @@ export function CtaV2() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
+            className="text-xs tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
           >
             09 — Get Started
           </motion.span>
@@ -164,11 +166,12 @@ export function CtaV2() {
           className="hidden lg:block flex-shrink-0 w-72 xl:w-80"
         >
           <div className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-border shadow-xl shadow-black/20 group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=670&fit=crop"
               alt="AI systems"
-              loading="lazy"
-              className="w-full h-full object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+              fill
+              className="object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+              sizes="320px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-background/10" />
           </div>

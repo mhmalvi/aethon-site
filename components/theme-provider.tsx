@@ -62,7 +62,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {isTransitioning && (
           <motion.div
-            className="fixed inset-0 z-[99999] pointer-events-none"
+            className="fixed inset-0 z-[200] pointer-events-none"
             initial={{ clipPath: "circle(0% at 50% 50%)" }}
             animate={{ clipPath: "circle(150% at 50% 50%)" }}
             exit={{ opacity: 0 }}
@@ -73,8 +73,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             style={{
               backgroundColor:
                 theme === "dark"
-                  ? "rgba(248, 248, 250, 0.15)"
-                  : "rgba(10, 12, 20, 0.15)",
+                  ? "var(--theme-transition-light, rgba(248, 248, 250, 0.15))"
+                  : "var(--theme-transition-dark, rgba(10, 12, 20, 0.15))",
             }}
           />
         )}

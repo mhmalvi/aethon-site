@@ -1,15 +1,34 @@
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/sections/navbar";
 import { CareersHero } from "@/components/sections/v2/careers/careers-hero";
-import { CareersContent } from "@/components/sections/v2/careers/careers-content";
-import { CtaV2 } from "@/components/sections/v2/cta-v2";
-import { FooterV2 } from "@/components/sections/v2/footer-v2";
+
+const CareersContent = dynamic(() =>
+  import("@/components/sections/v2/careers/careers-content").then((mod) => mod.CareersContent)
+);
+const CtaV2 = dynamic(() =>
+  import("@/components/sections/v2/cta-v2").then((mod) => mod.CtaV2)
+);
+const FooterV2 = dynamic(() =>
+  import("@/components/sections/v2/footer-v2").then((mod) => mod.FooterV2)
+);
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Careers — Aethon",
+  title: "Careers",
   description:
     "Join a focused engineering team that ships real systems for real businesses. Remote-first, ownership-driven.",
+  alternates: { canonical: "/careers" },
+  openGraph: {
+    title: "Careers — Aethon",
+    description:
+      "Join a focused engineering team that ships real systems for real businesses. Remote-first, ownership-driven.",
+  },
+  twitter: {
+    title: "Careers — Aethon",
+    description:
+      "Join a focused engineering team that ships real systems for real businesses. Remote-first, ownership-driven.",
+  },
 };
 
 export default function CareersPage() {

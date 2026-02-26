@@ -9,6 +9,7 @@ import {
 } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { TextRandomized } from "@/components/ui/text-randomized";
@@ -18,9 +19,9 @@ import { HERO } from "@/lib/constants";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const headlineLines = [
-  { text: "We engineer", className: "font-light text-foreground/60" },
+  { text: "We engineer", className: "font-normal text-foreground/60" },
   { text: "the systems", className: "font-bold gradient-text-accent" },
-  { text: "that power", className: "font-light text-foreground/60" },
+  { text: "that power", className: "font-normal text-foreground/60" },
   { text: "your business.", className: "font-bold text-foreground" },
 ];
 
@@ -117,7 +118,7 @@ export function HeroV2() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8 sm:mb-10"
           >
-            <span className="inline-flex items-center gap-2.5 text-[11px] tracking-[0.2em] uppercase text-secondary/80 font-medium">
+            <span className="inline-flex items-center gap-2.5 text-xs tracking-[0.2em] uppercase text-secondary/80 font-medium">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <TextRandomized text={HERO.badge} triggerOnView={false} />
             </span>
@@ -197,6 +198,29 @@ export function HeroV2() {
           </motion.div>
         </div>
 
+        {/* Right: Mobile single hero image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
+          className="lg:hidden w-full mt-4"
+        >
+          <div className="relative rounded-2xl overflow-hidden aspect-[16/9] border border-border shadow-xl shadow-black/30">
+            <Image
+              src="/images/hero/analytics-dashboard.webp"
+              alt="Data analytics dashboard"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/10" />
+            <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-2xl border border-border-light rounded-xl px-4 py-3">
+              <span className="font-heading text-2xl font-bold gradient-text-accent block leading-none">68%</span>
+              <span className="text-xs text-foreground/40 mt-1 block tracking-widest uppercase">Faster ops</span>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Right: Image collage with parallax — desktop */}
         <div className="hidden lg:flex flex-1 items-center justify-end pl-8 xl:pl-16">
           <div className="relative w-full max-w-[500px]">
@@ -209,10 +233,14 @@ export function HeroV2() {
               className="relative"
             >
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5] border border-border shadow-2xl shadow-black/40">
-                <img
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=1000&fit=crop"
+                <Image
+                  src="/images/hero/analytics-dashboard.webp"
                   alt="Data analytics dashboard"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  priority
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-background/5" />
               </div>
@@ -227,10 +255,12 @@ export function HeroV2() {
               className="absolute -top-8 -right-10 xl:-right-14 w-44 xl:w-52"
             >
               <div className="relative rounded-xl overflow-hidden aspect-[3/2] border border-border shadow-xl shadow-black/30">
-                <img
-                  src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=270&fit=crop"
+                <Image
+                  src="/images/hero/ai-visualization.webp"
                   alt="AI visualization"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="208px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
               </div>
@@ -245,10 +275,12 @@ export function HeroV2() {
               className="absolute -bottom-6 -left-10 xl:-left-16 w-48 xl:w-56"
             >
               <div className="relative rounded-xl overflow-hidden aspect-[3/2] border border-border shadow-xl shadow-black/30">
-                <img
-                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=270&fit=crop"
+                <Image
+                  src="/images/hero/security-infrastructure.webp"
                   alt="Security infrastructure"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="224px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
               </div>
@@ -264,7 +296,7 @@ export function HeroV2() {
               <span className="font-heading text-3xl font-bold gradient-text-accent block leading-none">
                 68%
               </span>
-              <span className="text-[10px] text-foreground/40 mt-1.5 block tracking-widest uppercase">
+              <span className="text-xs text-foreground/40 mt-1.5 block tracking-widest uppercase">
                 Faster ops
               </span>
             </motion.div>
@@ -279,7 +311,7 @@ export function HeroV2() {
         transition={{ duration: 0.6, delay: 2.0 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
       >
-        <span className="text-[9px] tracking-[0.25em] uppercase text-secondary/45 font-medium">
+        <span className="text-xs tracking-[0.25em] uppercase text-secondary/45 font-medium">
           Scroll
         </span>
         <ChevronDown

@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { Plus, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { INDUSTRIES } from "@/lib/constants";
 
@@ -31,7 +32,7 @@ export function IndustriesV2() {
           transition={{ duration: 0.6 }}
           className="mb-14 sm:mb-20"
         >
-          <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+          <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
             06 — {INDUSTRIES.sectionLabel}
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-3xl">
@@ -97,7 +98,7 @@ export function IndustriesV2() {
 
                   {/* Toggle */}
                   <div
-                    className={`w-9 h-9 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    className={`w-11 h-11 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                       isOpen
                         ? "border-accent/50 bg-accent/10"
                         : "border-border/80 group-hover:border-accent/40 group-hover:bg-accent/5"
@@ -120,15 +121,16 @@ export function IndustriesV2() {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      initial={{ gridTemplateRows: "0fr", opacity: 0 }}
+                      animate={{ gridTemplateRows: "1fr", opacity: 1 }}
+                      exit={{ gridTemplateRows: "0fr", opacity: 0 }}
                       transition={{
-                        height: { duration: 0.4, ease: EASE },
+                        gridTemplateRows: { duration: 0.4, ease: EASE },
                         opacity: { duration: 0.3, delay: 0.1 },
                       }}
-                      className="overflow-hidden"
+                      className="grid"
                     >
+                      <div className="overflow-hidden">
                       <div className="pb-8 sm:pb-10 pl-12 sm:pl-14 lg:pl-[72px] pr-8 sm:pr-14">
                         <div className="flex flex-col md:flex-row gap-6 md:gap-10">
                           {/* Accent line + text */}
@@ -159,16 +161,18 @@ export function IndustriesV2() {
                             className="flex-shrink-0 w-full md:w-72 lg:w-80"
                           >
                             <div className="relative rounded-xl overflow-hidden aspect-[16/10] border border-border shadow-lg shadow-black/10 group/img">
-                              <img
+                              <Image
                                 src={industry.imageUrl}
                                 alt={industry.label}
-                                loading="lazy"
-                                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.05]"
+                                fill
+                                className="object-cover transition-transform duration-500 ease-out group-hover/img:scale-[1.05]"
+                                sizes="(max-width: 768px) 100vw, 320px"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
                             </div>
                           </motion.div>
                         </div>
+                      </div>
                       </div>
                     </motion.div>
                   )}

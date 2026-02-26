@@ -134,7 +134,7 @@ export function NewsletterModal() {
                   </>
                 )}
               </Button>
-              <p className="text-[11px] text-secondary/55 text-center">
+              <p className="text-xs text-secondary/55 text-center">
                 Monthly insights. Unsubscribe anytime.
               </p>
             </form>
@@ -194,7 +194,7 @@ export function NewsletterModal() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 40, scale: 0.95 }}
           transition={{ duration: 0.4, ease: EASE }}
-          className="fixed bottom-6 right-6 z-[100] w-[380px] rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl shadow-black/50 overflow-hidden"
+          className="fixed bottom-6 right-6 z-[100] w-full max-w-[380px] rounded-2xl border border-border bg-background/95 backdrop-blur-xl shadow-2xl shadow-black/50 overflow-hidden"
         >
           {/* Top accent */}
           <div className="h-px bg-gradient-to-r from-transparent via-accent-cyan/40 to-transparent" />

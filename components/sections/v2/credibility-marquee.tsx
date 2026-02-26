@@ -12,7 +12,7 @@ function LogoItem({ name }: { name: string }) {
     <div className="flex items-center gap-3 px-6 py-3 rounded-full border border-border bg-surface-subtle backdrop-blur-sm select-none">
       {/* Abstract logo mark */}
       <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent/20 to-accent-cyan/10 flex items-center justify-center flex-shrink-0">
-        <span className="font-heading text-[10px] font-bold text-accent/80">
+        <span className="font-heading text-xs font-bold text-accent/80">
           {name.slice(0, 2).toUpperCase()}
         </span>
       </div>
@@ -34,7 +34,7 @@ export function CredibilityMarquee() {
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: EASE }}
-        className="text-center text-[11px] tracking-[0.2em] uppercase text-secondary/45 font-semibold mb-8 sm:mb-10 px-6"
+        className="text-center text-xs tracking-[0.2em] uppercase text-secondary/45 font-semibold mb-8 sm:mb-10 px-6"
       >
         {CREDIBILITY.trustLine}
       </motion.p>

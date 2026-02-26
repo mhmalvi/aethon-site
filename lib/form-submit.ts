@@ -1,33 +1,61 @@
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+const FORM_BASE_URL = process.env.NEXT_PUBLIC_FORM_BASE_URL || "";
+
+const FORM_ENDPOINTS: Record<string, string> = {
+  contact: `${FORM_BASE_URL}/aethon-contact`,
+  consultation: `${FORM_BASE_URL}/aethon-consultation`,
+  newsletter: `${FORM_BASE_URL}/aethon-newsletter`,
+  "job-application": `${FORM_BASE_URL}/aethon-job-application`,
+};
 
 export interface FormSubmitResult {
   success: boolean;
   error?: string;
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function validateForm(
+  data: Record<string, string>,
+  formType: string
+): string | null {
+  if (formType === "newsletter") {
+    if (!data.email?.trim()) return "Email is required.";
+    if (!EMAIL_RE.test(data.email)) return "Please enter a valid email address.";
+    return null;
+  }
+
+  if (!data.name?.trim()) return "Name is required.";
+  if (!data.email?.trim()) return "Email is required.";
+  if (!EMAIL_RE.test(data.email)) return "Please enter a valid email address.";
+  return null;
+}
+
 export async function submitForm(
   data: Record<string, string>,
   formType: string
 ): Promise<FormSubmitResult> {
-  // Honeypot check — if filled, silently "succeed" (bot trap)
   if (data._honeypot) {
     return { success: true };
+  }
+
+  const validationError = validateForm(data, formType);
+  if (validationError) {
+    return { success: false, error: validationError };
   }
 
   const { _honeypot: _, ...rest } = data;
   const payload = { ...rest, _formType: formType };
 
-  if (!FORM_ENDPOINT) {
-    // No endpoint configured — log to console in dev, warn in production
-    if (process.env.NODE_ENV === "development") {
-      console.log(`[Form: ${formType}]`, payload);
-    }
-    // Still return success so the UI works — configure NEXT_PUBLIC_FORM_ENDPOINT for real submissions
-    return { success: true };
+  const endpoint = FORM_ENDPOINTS[formType];
+  if (!endpoint || !FORM_BASE_URL) {
+    return {
+      success: false,
+      error: "Form submission is not configured. Please contact us directly at info@aethonautomation.com.",
+    };
   }
 
   try {
-    const res = await fetch(FORM_ENDPOINT, {
+    const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload),

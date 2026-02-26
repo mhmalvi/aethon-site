@@ -7,6 +7,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
+import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -85,7 +86,7 @@ export function Manifesto() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold mb-14 sm:mb-16 block"
+            className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold mb-14 sm:mb-16 block"
           >
             01 — Philosophy
           </motion.span>
@@ -137,11 +138,12 @@ export function Manifesto() {
           className="hidden lg:block flex-shrink-0 w-64 xl:w-72"
         >
           <div className="relative rounded-2xl overflow-hidden aspect-[3/4] border border-border shadow-xl shadow-black/20">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&h=670&fit=crop"
               alt="Team collaboration"
-              loading="lazy"
-              className="w-full h-full object-cover opacity-70"
+              fill
+              className="object-cover opacity-70"
+              sizes="288px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/10" />
           </div>

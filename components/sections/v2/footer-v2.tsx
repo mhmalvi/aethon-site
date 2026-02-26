@@ -5,6 +5,7 @@ import { motion, useInView } from "motion/react";
 import { useLenis } from "lenis/react";
 import { ArrowUpRight, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { FOOTER } from "@/lib/constants";
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -51,11 +52,13 @@ export function FooterV2() {
             transition={{ duration: 0.6, ease: EASE }}
             className="max-w-md"
           >
-            <img
+            <Image
               src="/aethon-logo-full.png"
               alt="Aethon"
-              loading="lazy"
-              className="h-16 sm:h-20 w-auto mb-8 dark:invert"
+              width={200}
+              height={80}
+              className="h-16 sm:h-20 w-auto mb-8"
+              style={{ filter: "var(--logo-invert)" }}
             />
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Have a project in mind?
@@ -75,7 +78,7 @@ export function FooterV2() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 sm:gap-12 lg:gap-14">
               {linkGroups.map((group, gi) => (
                 <div key={group.title}>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary/55 mb-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-secondary/55 mb-5">
                     {group.title}
                   </p>
                   <nav className="flex flex-col gap-3">
@@ -108,7 +111,7 @@ export function FooterV2() {
               {/* Email — prominent */}
               <a
                 href={`mailto:${FOOTER.contact.email}`}
-                className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group"
+                className="inline-flex items-center gap-2 text-base font-semibold text-foreground/80 hover:text-accent transition-all duration-300 group min-h-[44px]"
               >
                 <span className="relative border-b border-foreground/20 group-hover:border-accent pb-0.5 transition-colors duration-300">
                   {FOOTER.contact.email}
@@ -122,7 +125,7 @@ export function FooterV2() {
                   <a
                     key={num}
                     href={`tel:${num.replace(/[^+\d]/g, "")}`}
-                    className="text-sm text-secondary/60 hover:text-accent transition-colors duration-200"
+                    className="text-sm text-secondary/60 hover:text-accent transition-colors duration-200 py-2"
                   >
                     {num}
                   </a>
@@ -144,7 +147,7 @@ export function FooterV2() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-secondary/50 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 hover:-translate-y-0.5"
+                      className="w-11 h-11 rounded-lg border border-border flex items-center justify-center text-secondary/50 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/5 transition-all duration-300 hover:-translate-y-0.5"
                     >
                       {Icon && <Icon className="w-4 h-4" />}
                     </a>
@@ -165,26 +168,29 @@ export function FooterV2() {
             className="select-none pointer-events-none overflow-hidden"
             style={{ animation: "v2-watermark-drift 12s ease-in-out infinite" }}
           >
-            <img
+            <Image
               src="/aethon-wordmark.png"
               alt=""
+              width={1440}
+              height={200}
               aria-hidden="true"
-              className="w-full h-auto dark:invert opacity-[0.04] dark:opacity-[0.06]"
+              className="w-full h-auto opacity-[0.04] dark:opacity-[0.06]"
+              style={{ filter: "var(--logo-invert)" }}
             />
           </motion.div>
 
           {/* Footer bar */}
           <div className="flex flex-col sm:flex-row justify-between items-end border-t border-border/40 pt-7 pb-2 -mt-[2vw] relative z-10 gap-4">
-            <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-secondary/45">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-secondary/45">
               {FOOTER.copyright}
             </span>
             <div className="flex gap-6 sm:gap-8 items-center">
-              <span className="text-[11px] text-secondary/55 hidden sm:block">
+              <span className="text-xs text-secondary/55 hidden sm:block">
                 {FOOTER.contact.location}
               </span>
               <button
                 onClick={scrollToTop}
-                className="text-[11px] font-bold uppercase tracking-[0.15em] text-secondary/55 hover:text-accent transition-all duration-300 cursor-pointer hover:-translate-y-0.5"
+                className="text-xs font-bold uppercase tracking-[0.15em] text-secondary/55 hover:text-accent transition-all duration-300 cursor-pointer hover:-translate-y-0.5 min-h-[44px] flex items-center"
               >
                 Back to top &uarr;
               </button>

@@ -3,6 +3,7 @@
 import { useRef, useCallback, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { Code2, ShieldCheck, GitBranch, Infinity, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
 import { WHY_CHOOSE_US } from "@/lib/constants";
@@ -85,11 +86,12 @@ function ScrollCard({ index }: { index: number }) {
     >
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
-        <img
+        <Image
           src={differentiatorImages[index]}
           alt={item.title}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 ease-out"
+          fill
+          className="object-cover transition-transform duration-700 ease-out"
+          sizes="(max-width: 1024px) 100vw, 50vw"
           style={{
             transform: hovered ? "scale(1.06)" : "scale(1)",
             filter: hovered ? "brightness(1)" : "brightness(0.8) saturate(0.9)",
@@ -100,7 +102,7 @@ function ScrollCard({ index }: { index: number }) {
         {/* Category pill on image */}
         <div className="absolute top-4 left-4">
           <span
-            className="text-[10px] tracking-[0.15em] uppercase font-bold backdrop-blur-sm rounded-full px-3 py-1 border"
+            className="text-xs tracking-[0.15em] uppercase font-bold backdrop-blur-sm rounded-full px-3 py-1 border"
             style={{
               background: accent.bg,
               color: accent.color,
@@ -206,7 +208,7 @@ export function Differentiators() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5 }}
-                  className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-5"
+                  className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-5"
                 >
                   07 — {WHY_CHOOSE_US.sectionLabel}
                 </motion.span>
@@ -310,7 +312,7 @@ export function Differentiators() {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               07 — {WHY_CHOOSE_US.sectionLabel}
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight max-w-md mb-4">

@@ -1,12 +1,20 @@
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/sections/navbar";
 import {
   SolutionDetailHero,
-  SolutionDetailContent,
 } from "@/components/sections/v2/solutions/solution-detail";
-import { CtaV2 } from "@/components/sections/v2/cta-v2";
-import { FooterV2 } from "@/components/sections/v2/footer-v2";
 import { SOLUTIONS } from "@/lib/constants";
+
+const SolutionDetailContent = dynamic(() =>
+  import("@/components/sections/v2/solutions/solution-detail").then((mod) => mod.SolutionDetailContent)
+);
+const CtaV2 = dynamic(() =>
+  import("@/components/sections/v2/cta-v2").then((mod) => mod.CtaV2)
+);
+const FooterV2 = dynamic(() =>
+  import("@/components/sections/v2/footer-v2").then((mod) => mod.FooterV2)
+);
 
 import type { Metadata } from "next";
 
@@ -25,9 +33,25 @@ export async function generateMetadata({
   const pillar = SOLUTIONS.pillars.find((p) => p.id === slug);
   if (!pillar) return { title: "Solution — Aethon" };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aethonautomation.com";
   return {
     title: `${pillar.title} — Aethon`,
     description: pillar.description,
+    openGraph: {
+      title: `${pillar.title} — Aethon`,
+      description: pillar.description,
+      url: `${siteUrl}/solutions/${slug}`,
+      siteName: "Aethon",
+      images: [{ url: "/aethon-og.png", width: 1200, height: 630 }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pillar.title} — Aethon`,
+      description: pillar.description,
+      images: ["/aethon-og.png"],
+    },
+    alternates: { canonical: `/solutions/${slug}` },
   };
 }
 
@@ -44,7 +68,7 @@ export default async function SolutionDetailPage({
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <SolutionDetailHero pillarIndex={pillarIndex} />
         <SolutionDetailContent pillarIndex={pillarIndex} />
         <CtaV2 />

@@ -10,7 +10,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   return (
     <motion.button
       onClick={toggleTheme}
-      className={`relative w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer transition-colors ${
+      className={`relative w-11 h-11 rounded-xl flex items-center justify-center cursor-pointer transition-colors ${
         theme === "dark"
           ? "bg-foreground/10 hover:bg-foreground/15 text-foreground"
           : "bg-foreground/5 hover:bg-foreground/10 text-foreground"
@@ -33,7 +33,7 @@ function AnimatedIcon({ theme }: { theme: string }) {
       exit={{ scale: 0, rotate: 90, opacity: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+      {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
     </motion.div>
   );
 }

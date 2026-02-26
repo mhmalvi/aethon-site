@@ -201,7 +201,7 @@ export function ConsultationModal({ children }: ConsultationModalProps) {
                     )}
                   </Button>
 
-                  <p className="text-[11px] text-secondary/45 text-center">
+                  <p className="text-xs text-secondary/45 text-center">
                     No commitment required. We typically respond same day.
                   </p>
                 </form>

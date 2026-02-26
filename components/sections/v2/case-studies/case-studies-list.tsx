@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
 import { CASE_STUDIES } from "@/lib/constants";
@@ -53,7 +54,7 @@ export function CaseStudiesList() {
           transition={{ duration: 0.6 }}
           className="mb-14 sm:mb-16"
         >
-          <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+          <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
             01 — Engagements
           </span>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -104,11 +105,12 @@ export function CaseStudiesList() {
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   {/* Image */}
                   <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
-                    <img
+                    <Image
                       src={study.image}
                       alt={study.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out"
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       style={{
                         transform: isHovered ? "scale(1.05)" : "scale(1)",
                       }}
@@ -139,7 +141,7 @@ export function CaseStudiesList() {
                           <span className="block font-heading text-2xl font-bold gradient-text-accent">
                             {study.metric}
                           </span>
-                          <span className="text-[11px] text-secondary/55 tracking-wide">
+                          <span className="text-xs text-secondary/55 tracking-wide">
                             {study.metricLabel}
                           </span>
                         </div>
@@ -147,7 +149,7 @@ export function CaseStudiesList() {
                           <span className="block font-heading text-2xl font-bold text-accent-cyan">
                             {study.secondaryMetric}
                           </span>
-                          <span className="text-[11px] text-secondary/55 tracking-wide">
+                          <span className="text-xs text-secondary/55 tracking-wide">
                             {study.secondaryLabel}
                           </span>
                         </div>

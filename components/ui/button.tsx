@@ -20,10 +20,10 @@ const buttonVariants = cva(
           "text-accent underline-offset-4 hover:underline hover:brightness-125",
       },
       size: {
-        default: "px-5 py-2.5",
-        sm: "h-8 px-3 text-xs",
+        default: "px-5 py-3",
+        sm: "h-11 px-3 text-xs",
         lg: "h-12 px-8 text-base font-semibold",
-        icon: "size-9",
+        icon: "size-11",
       },
     },
     defaultVariants: {

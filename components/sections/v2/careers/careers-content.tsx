@@ -60,7 +60,7 @@ export function CareersContent() {
             transition={{ duration: 0.6 }}
             className="mb-14 sm:mb-16"
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               01 — How We Work
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight max-w-2xl">
@@ -155,7 +155,7 @@ export function CareersContent() {
             transition={{ duration: 0.6 }}
             className="mb-14 sm:mb-16"
           >
-            <span className="text-[11px] tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
+            <span className="text-xs tracking-[0.2em] uppercase text-secondary/50 font-semibold block mb-4">
               02 — Open Positions
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight max-w-2xl">

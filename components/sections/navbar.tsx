@@ -17,6 +17,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
@@ -101,6 +102,16 @@ function DesktopDropdown({
           "relative text-sm transition-all duration-300 group/nav flex items-center gap-1 py-2",
           isOpen ? "text-foreground" : "text-secondary hover:text-foreground"
         )}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            isOpen ? onClose() : onOpen();
+          } else if (e.key === "Escape" && isOpen) {
+            onClose();
+          }
+        }}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         {link.label}
         <ChevronDown
@@ -126,7 +137,7 @@ function DesktopDropdown({
             transition={{ duration: 0.2, ease: EASE }}
             className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
           >
-            <div className="bg-nav-bg backdrop-blur-xl border border-border rounded-xl shadow-2xl shadow-black/30 overflow-hidden min-w-[520px]">
+            <div className="bg-nav-bg backdrop-blur-xl border border-border rounded-xl shadow-2xl shadow-black/30 overflow-hidden min-w-[440px]">
               {/* Subtle top accent line */}
               <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
@@ -288,13 +299,11 @@ export function Navbar() {
 
   // Close dropdown on significant scroll (> 80px)
   useEffect(() => {
-    let scrollAtOpen = window.scrollY;
+    if (!openDropdown) return;
+    const scrollAtOpen = window.scrollY;
     const closeDropdown = () => {
-      if (openDropdown && Math.abs(window.scrollY - scrollAtOpen) > 80) {
+      if (Math.abs(window.scrollY - scrollAtOpen) > 80) {
         setOpenDropdown(null);
-      }
-      if (!openDropdown) {
-        scrollAtOpen = window.scrollY;
       }
     };
     window.addEventListener("scroll", closeDropdown, { passive: true });
@@ -310,13 +319,16 @@ export function Navbar() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-3 sm:px-6 lg:px-8 h-16">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <img
+          <Image
             src="/aethon-wordmark.png"
             alt="Aethon"
-            className="h-6 sm:h-7 w-auto dark:invert transition-opacity duration-200 hover:opacity-80"
+            width={140}
+            height={28}
+            className="h-6 sm:h-7 w-auto transition-opacity duration-200 hover:opacity-80"
+            style={{ filter: "var(--logo-invert)" }}
           />
         </Link>
 
@@ -349,7 +361,7 @@ export function Navbar() {
         <div className="lg:hidden flex items-center gap-2">
           <ThemeToggle />
           <button
-            className="p-2 text-foreground"
+            className="p-2.5 text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}

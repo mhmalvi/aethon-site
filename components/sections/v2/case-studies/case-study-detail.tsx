@@ -14,6 +14,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { TextRandomized } from "@/components/ui/text-randomized";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
@@ -48,11 +49,13 @@ export function CaseStudyDetailHero({ studyIndex }: { studyIndex: number }) {
       {/* Parallax background */}
       <div className="absolute inset-0">
         <motion.div style={{ y: bgY }} className="absolute inset-[-20%]">
-          <img
+          <Image
             src={study.image}
             alt=""
-            loading="lazy"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
           />
         </motion.div>
         <div className="absolute inset-0 bg-background/82" />
@@ -107,7 +110,7 @@ export function CaseStudyDetailHero({ studyIndex }: { studyIndex: number }) {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-[11px] tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
+          className="text-xs tracking-[0.2em] uppercase text-foreground/50 font-semibold block mb-6"
         >
           <TextRandomized text={study.industry} />
         </motion.span>
@@ -324,13 +327,14 @@ export function CaseStudyDetailContent({ studyIndex }: { studyIndex: number }) {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-              className="rounded-2xl overflow-hidden border border-border aspect-[4/3]"
+              className="relative rounded-2xl overflow-hidden border border-border aspect-[4/3]"
             >
-              <img
+              <Image
                 src={study.image}
                 alt={study.title}
-                loading="lazy"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </motion.div>
 
