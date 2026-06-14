@@ -1,3 +1,13 @@
+# aethon-site
+
+> Marketing site for Aethon Automation Solutions — autonomous AI agents and automation infrastructure.
+
+![Aethon site](docs/assets/screenshot.png)
+
+🔗 **Live:** [aethonautomation.com](https://aethonautomation.com)
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
