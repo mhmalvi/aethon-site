@@ -1,7 +1,7 @@
 <!-- repo-card -->
-![aethon-site](docs/assets/screenshot.png)
+![aethon-site](docs/assets/social-card.png)
 
-> 🔗 **Live:** [aethonautomation.com](https://aethonautomation.com)
+![aethon-site — architecture](docs/assets/architecture.png)
 
 # Aethon Site
 
