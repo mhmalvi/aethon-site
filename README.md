@@ -1,3 +1,8 @@
+<!-- repo-card -->
+![aethon-site](docs/assets/screenshot.png)
+
+> 🔗 **Live:** [aethonautomation.com](https://aethonautomation.com)
+
 # Aethon Site
 
 A modern corporate website for Aethon, built with Next.js 16 and React 19. Features smooth animations, 3D shader gradients, and a comprehensive page structure covering products, solutions, case studies, and insights.
